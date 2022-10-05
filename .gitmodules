@@ -1,0 +1,3 @@
+[submodule "BookMyShow-Configuration"]
+	path = BookMyShow-Configuration
+	url = https://github.com/akarshippili/BookMyShow-Configuration
