@@ -54,4 +54,11 @@ public class PermissionService {
         return modelMapper.map(newPermission, PermissionDTO.class);
     }
 
+    public void delete(Long id){
+        Optional<Permission> optionalPermission = repository.findById(id);
+        if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(String.format("Permission with id: %d not found", id));
+
+        repository.delete(optionalPermission.get());
+    }
+
 }
