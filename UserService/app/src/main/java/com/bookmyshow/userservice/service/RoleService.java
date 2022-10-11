@@ -57,7 +57,7 @@ public class RoleService {
         return modelMapper.map(newRole, RoleDTO.class);
     }
 
-    public void remove(Long id){
+    public void delete(Long id){
         Optional<Role> roleOptional = repository.findById(id);
         if(roleOptional.isEmpty()) {
             throw new RoleNotFoundException(String.format("Role of %d is not found", id));
