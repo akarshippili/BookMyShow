@@ -42,4 +42,16 @@ public class PermissionService {
         return modelMapper.map(optionalPermission.get(), PermissionDTO.class);
     }
 
+    public PermissionDTO update(Long id, PermissionDTO permissionDTO){
+        Optional<Permission> optionalPermission = repository.findById(id);
+        if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(String.format("Permission with id: %d not found", id));
+
+        Permission newPermission = modelMapper.map(permissionDTO, Permission.class);
+        newPermission.setId(id);
+
+        repository.save(newPermission);
+
+        return modelMapper.map(newPermission, PermissionDTO.class);
+    }
+
 }
