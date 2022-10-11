@@ -66,13 +66,4 @@ public class RoleService {
         repository.delete(roleOptional.get());
     }
 
-    public void remove(String role){
-        Optional<Role> roleOptional = repository.findByRole(role);
-        if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(String.format("Role of %s is not found", role));
-        }
-
-        repository.delete(roleOptional.get());
-    }
-
 }
