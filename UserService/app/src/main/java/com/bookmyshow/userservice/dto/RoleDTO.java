@@ -5,7 +5,6 @@ import com.bookmyshow.userservice.dao.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
