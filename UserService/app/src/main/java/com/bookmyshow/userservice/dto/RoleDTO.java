@@ -1,6 +1,5 @@
 package com.bookmyshow.userservice.dto;
 
-import com.bookmyshow.userservice.dao.entity.Permission;
 import com.bookmyshow.userservice.dao.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -23,8 +22,8 @@ public class RoleDTO {
     @NotBlank
     private String roleDescription;
 
-    @JsonIgnore
-    private Set<Permission> permissions;
+
+    private Set<PermissionDTO> permissions;
 
     @JsonIgnore
     private Set<User> users;
@@ -32,7 +31,7 @@ public class RoleDTO {
     public RoleDTO() {
     }
 
-    public RoleDTO(Long id, String role, String roleDescription, Set<Permission> permissions, Set<User> users) {
+    public RoleDTO(Long id, String role, String roleDescription, Set<PermissionDTO> permissions, Set<User> users) {
         this.id = id;
         this.role = role;
         this.roleDescription = roleDescription;
@@ -76,11 +75,11 @@ public class RoleDTO {
         this.roleDescription = roleDescription;
     }
 
-    public Set<Permission> getPermissions() {
+    public Set<PermissionDTO> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(Set<Permission> permissions) {
+    public void setPermissions(Set<PermissionDTO> permissions) {
         this.permissions = permissions;
     }
 
