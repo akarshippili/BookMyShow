@@ -23,7 +23,7 @@ public class PermissionDTO {
     private String permissionDescription;
 
     @JsonIgnore
-    private Set<Role> roles;
+    private Set<RoleDTO> roles;
 
     public PermissionDTO() {
     }
@@ -63,11 +63,11 @@ public class PermissionDTO {
         this.permissionDescription = permissionDescription;
     }
 
-    public Set<Role> getRoles() {
+    public Set<RoleDTO> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<RoleDTO> roles) {
         this.roles = roles;
     }
 }
