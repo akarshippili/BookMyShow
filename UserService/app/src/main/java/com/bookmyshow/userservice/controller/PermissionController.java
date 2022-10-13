@@ -1,11 +1,9 @@
 package com.bookmyshow.userservice.controller;
 
-import com.bookmyshow.userservice.dao.entity.Permission;
-import com.bookmyshow.userservice.dto.PermissionDTO;
-import com.bookmyshow.userservice.dto.RoleDTO;
+import com.bookmyshow.userservice.dto.PermissionRequestDTO;
+import com.bookmyshow.userservice.dto.PermissionResponseDTO;
 import com.bookmyshow.userservice.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.endpoint.web.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,23 +19,23 @@ public class PermissionController {
     private PermissionService service;
 
     @PostMapping(path = "/permissions")
-    public ResponseEntity<PermissionDTO> addPermission(@Valid @RequestBody PermissionDTO permissionDTO){
-        return new ResponseEntity( service.addPermission(permissionDTO) , HttpStatus.CREATED);
+    public ResponseEntity<PermissionResponseDTO> addPermission(@Valid @RequestBody PermissionRequestDTO permissionRequestDTO){
+        return new ResponseEntity( service.addPermission(permissionRequestDTO) , HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/permissions")
-    public ResponseEntity<List<PermissionDTO>> getAllPermissions() {
+    public ResponseEntity<List<PermissionResponseDTO>> getAllPermissions() {
         return new ResponseEntity<>( service.getAllPermissions() , HttpStatus.OK);
     }
 
     @GetMapping(path = "/permissions/{id}")
-    public ResponseEntity<PermissionDTO> getAllPermissions(@PathVariable Long id) {
+    public ResponseEntity<PermissionResponseDTO> getAllPermissions(@PathVariable Long id) {
         return new ResponseEntity<>( service.getPermissionById(id) , HttpStatus.OK);
     }
 
     @PutMapping(path = "/permissions/{id}")
-    public ResponseEntity<PermissionDTO> update(@PathVariable Long id, @Valid @RequestBody PermissionDTO permissionDTO){
-        PermissionDTO updatedPermission = service.update(id, permissionDTO);
+    public ResponseEntity<PermissionResponseDTO> update(@PathVariable Long id, @Valid @RequestBody PermissionRequestDTO permissionRequestDTO){
+        PermissionResponseDTO updatedPermission = service.update(id, permissionRequestDTO);
         return new ResponseEntity<>(updatedPermission, HttpStatus.OK);
     }
 
