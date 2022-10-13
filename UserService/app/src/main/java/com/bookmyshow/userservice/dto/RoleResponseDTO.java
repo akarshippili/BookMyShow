@@ -12,33 +12,22 @@ import java.util.Set;
         "role",
         "roleDescription"
 })
-public class RoleDTO {
+public class RoleResponseDTO {
 
     private Long id;
 
-    @NotBlank
     private String role;
 
-    @NotBlank
     private String roleDescription;
 
-
-    private Set<PermissionDTO> permissions;
-
-    @JsonIgnore
-    private Set<User> users;
-
-    public RoleDTO() {
+    public RoleResponseDTO() {
     }
 
-    public RoleDTO(Long id, String role, String roleDescription, Set<PermissionDTO> permissions, Set<User> users) {
+    public RoleResponseDTO(Long id, String role, String roleDescription) {
         this.id = id;
         this.role = role;
         this.roleDescription = roleDescription;
-        this.permissions = permissions;
-        this.users = users;
     }
-
 
     @Override
     public String toString() {
@@ -46,8 +35,6 @@ public class RoleDTO {
                 "id=" + id +
                 ", role='" + role + '\'' +
                 ", roleDescription='" + roleDescription + '\'' +
-                ", permissions=" + permissions +
-                ", users=" + users +
                 '}';
     }
 
@@ -73,21 +60,5 @@ public class RoleDTO {
 
     public void setRoleDescription(String roleDescription) {
         this.roleDescription = roleDescription;
-    }
-
-    public Set<PermissionDTO> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Set<PermissionDTO> permissions) {
-        this.permissions = permissions;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 }
