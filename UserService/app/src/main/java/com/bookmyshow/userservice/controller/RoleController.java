@@ -1,5 +1,6 @@
 package com.bookmyshow.userservice.controller;
 
+import com.bookmyshow.userservice.dto.PermissionResponseDTO;
 import com.bookmyshow.userservice.dto.RoleRequestDTO;
 import com.bookmyshow.userservice.dto.RoleResponseDTO;
 import com.bookmyshow.userservice.service.RoleService;
@@ -26,6 +27,23 @@ public class RoleController {
     @GetMapping(path = "/roles/{id}")
     public ResponseEntity<RoleResponseDTO> getRole(@PathVariable Long id) {
         return new ResponseEntity<>(service.getRoleById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/roles/{id}/permissions")
+    public ResponseEntity<List<PermissionResponseDTO>> getPermissionOfRole(@PathVariable Long id) {
+        return new ResponseEntity<>(service.getPermissionOfRole(id), HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/roles/{id}/permissions")
+    public ResponseEntity<Object> addPermissionsToRole(@PathVariable Long id, @RequestBody List<Long> permissionIds) {
+        service.addPermissionsToRole(id, permissionIds);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(path = "/roles/{id}/permissions")
+    public ResponseEntity<Object> deletePermissionToRole(@PathVariable Long id, @RequestBody List<Long> permissionIds) {
+        service.deletePermissionToRole(id, permissionIds);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping(path = "/roles")
