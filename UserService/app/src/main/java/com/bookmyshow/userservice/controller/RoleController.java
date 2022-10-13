@@ -1,6 +1,7 @@
 package com.bookmyshow.userservice.controller;
 
-import com.bookmyshow.userservice.dto.RoleDTO;
+import com.bookmyshow.userservice.dto.RoleRequestDTO;
+import com.bookmyshow.userservice.dto.RoleResponseDTO;
 import com.bookmyshow.userservice.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,23 +19,23 @@ public class RoleController {
     private RoleService service;
 
     @PostMapping(path = "/roles")
-    public ResponseEntity<RoleDTO> addRole(@Valid @RequestBody RoleDTO roleDTO){
-        return new ResponseEntity(service.addRole(roleDTO), HttpStatus.CREATED);
+    public ResponseEntity<RoleResponseDTO> addRole(@Valid @RequestBody RoleRequestDTO role){
+        return new ResponseEntity(service.addRole(role), HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/roles/{id}")
-    public ResponseEntity<RoleDTO> getRole(@PathVariable Long id) {
+    public ResponseEntity<RoleResponseDTO> getRole(@PathVariable Long id) {
         return new ResponseEntity<>(service.getRoleById(id), HttpStatus.OK);
     }
 
     @GetMapping(path = "/roles")
-    public ResponseEntity<List<RoleDTO>> getAllRoles() {
+    public ResponseEntity<List<RoleResponseDTO>> getAllRoles() {
         return new ResponseEntity<>(service.getAllRoles(), HttpStatus.OK);
     }
 
     @PutMapping(path = "/roles/{id}")
-    public ResponseEntity<RoleDTO> update(@PathVariable Long id, @RequestBody RoleDTO roleDTO){
-        RoleDTO updatedRole = service.update(id, roleDTO);
+    public ResponseEntity<RoleResponseDTO> update(@PathVariable Long id, @RequestBody RoleRequestDTO roleRequestDTO){
+        RoleResponseDTO updatedRole = service.update(id, roleRequestDTO);
         return new ResponseEntity<>(updatedRole, HttpStatus.OK);
     }
 
