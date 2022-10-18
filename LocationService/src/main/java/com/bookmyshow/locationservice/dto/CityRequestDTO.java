@@ -6,7 +6,7 @@ import com.bookmyshow.locationservice.dao.entity.State;
 public class CityRequestDTO {
 
     private String name;
-    private State state;
+    private Long stateId;
 
     public CityRequestDTO() {
     }
@@ -15,7 +15,7 @@ public class CityRequestDTO {
     public String toString() {
         return "CityRequestDTO{" +
                 "name='" + name + '\'' +
-                ", state=" + state +
+                ", stateId=" + stateId +
                 '}';
     }
 
@@ -27,11 +27,11 @@ public class CityRequestDTO {
         this.name = name;
     }
 
-    public State getState() {
-        return state;
+    public Long getStateId() {
+        return stateId;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setStateId(Long stateId) {
+        this.stateId = stateId;
     }
 }
