@@ -1,6 +1,7 @@
 package com.bookmyshow.locationservice.dao.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "State")
@@ -12,6 +13,9 @@ public class State {
 
     @Column(name = "NAME")
     private String name;
+
+    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
+    private List<City> cities;
 
     public State() {
     }
@@ -39,5 +43,9 @@ public class State {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<City> getCities() {
+        return cities;
     }
 }
