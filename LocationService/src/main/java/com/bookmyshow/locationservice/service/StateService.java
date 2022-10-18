@@ -1,5 +1,6 @@
 package com.bookmyshow.locationservice.service;
 
+import com.bookmyshow.locationservice.dto.CityResponseDTO;
 import com.bookmyshow.locationservice.dto.StateRequestDTO;
 import com.bookmyshow.locationservice.dto.StateResponseDTO;
 
@@ -16,5 +17,7 @@ public interface StateService {
     StateResponseDTO update(Long id, StateRequestDTO requestDTO);
 
     void delete(Long id);
+
+    List<CityResponseDTO> getCitiesByStateId(Long id);
 
 }
