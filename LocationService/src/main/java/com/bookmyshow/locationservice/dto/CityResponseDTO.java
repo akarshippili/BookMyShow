@@ -7,7 +7,7 @@ public class CityResponseDTO {
 
     private Long cityId;
     private String name;
-    private State state;
+    private StateResponseDTO state;
 
 
     public CityResponseDTO() {
@@ -29,11 +29,11 @@ public class CityResponseDTO {
         this.name = name;
     }
 
-    public State getState() {
+    public StateResponseDTO getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(StateResponseDTO state) {
         this.state = state;
     }
 
