@@ -1,9 +1,6 @@
 package com.bookmyshow.userservice.dto;
 
-import com.bookmyshow.userservice.dao.entity.Role;
-
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
 
 public class UserRequestDTO {
 
