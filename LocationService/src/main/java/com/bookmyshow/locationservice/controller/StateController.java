@@ -1,5 +1,6 @@
 package com.bookmyshow.locationservice.controller;
 
+import com.bookmyshow.locationservice.dto.CityResponseDTO;
 import com.bookmyshow.locationservice.dto.StateRequestDTO;
 import com.bookmyshow.locationservice.dto.StateResponseDTO;
 import com.bookmyshow.locationservice.service.StateService;
@@ -33,6 +34,11 @@ public class StateController {
     @GetMapping(path = "/states/{id}")
     public ResponseEntity<StateResponseDTO> getStateById(@PathVariable Long id){
         return new ResponseEntity<>(service.getStateById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/states/{id}/cities")
+    public ResponseEntity<List<CityResponseDTO>> getCitiesByStateId(@PathVariable Long id){
+        return new ResponseEntity<>(service.getCitiesByStateId(id), HttpStatus.OK);
     }
 
 
