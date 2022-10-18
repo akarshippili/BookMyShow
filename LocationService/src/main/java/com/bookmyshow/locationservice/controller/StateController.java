@@ -46,6 +46,4 @@ public class StateController {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 }
