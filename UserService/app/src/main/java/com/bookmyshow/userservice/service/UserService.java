@@ -29,6 +29,12 @@ public class UserService {
     private ModelMapper modelMapper;
 
     public UserResponseDTO addUser(UserRequestDTO userRequestDTO){
+
+        if(userRequestDTO.getRoleId()!=null){
+            Optional<Role> optionalRole = roleRepository.findById(userRequestDTO.getRoleId());
+            if(optionalRole.isEmpty()) throw new RoleNotFoundException(String.format("Role of %d is not found", userRequestDTO.getRoleId()));
+        }
+
         User user = modelMapper.map(userRequestDTO, User.class);
         user = repository.save(user);
         return modelMapper.map(user, UserResponseDTO.class);
