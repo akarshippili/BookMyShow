@@ -2,6 +2,7 @@ package com.bookmyshow.locationservice.service;
 
 import com.bookmyshow.locationservice.dao.entity.State;
 import com.bookmyshow.locationservice.dao.repo.StateRepository;
+import com.bookmyshow.locationservice.dto.CityResponseDTO;
 import com.bookmyshow.locationservice.dto.StateRequestDTO;
 import com.bookmyshow.locationservice.dto.StateResponseDTO;
 import com.bookmyshow.locationservice.exception.StateNotFoundException;
@@ -60,6 +61,20 @@ public class StateServiceImpl implements StateService {
         State state = modelMapper.map(request, State.class);
         state = repository.save(state);
         return modelMapper.map(state, StateResponseDTO.class);
+    }
+
+
+    public List<CityResponseDTO> getCitiesByStateId(Long id) {
+        Optional<State> stateOptional =  repository.findById(id);
+        if(stateOptional.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", id));
+
+
+        return stateOptional
+                .get()
+                .getCities()
+                .stream()
+                .map(city -> modelMapper.map(city, CityResponseDTO.class))
+                .collect(Collectors.toList());
     }
 
 }
