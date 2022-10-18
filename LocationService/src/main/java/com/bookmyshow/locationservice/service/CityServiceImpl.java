@@ -1,21 +1,26 @@
 package com.bookmyshow.locationservice.service;
 
 import com.bookmyshow.locationservice.dao.entity.City;
+import com.bookmyshow.locationservice.dao.entity.State;
 import com.bookmyshow.locationservice.dao.repo.CityRepository;
+import com.bookmyshow.locationservice.dao.repo.StateRepository;
 import com.bookmyshow.locationservice.dto.CityRequestDTO;
 import com.bookmyshow.locationservice.dto.CityResponseDTO;
 import com.bookmyshow.locationservice.exception.CityNotFoundException;
+import com.bookmyshow.locationservice.exception.StateNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 @Service
 public class CityServiceImpl implements CityService {
+
+    @Autowired
+    private StateRepository stateRepository;
 
     @Autowired
     private CityRepository repository;
@@ -25,7 +30,12 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public CityResponseDTO addCity(CityRequestDTO requestDTO) {
-        City city = modelMapper.map(requestDTO, City.class);
+        Optional<State> optionalState = stateRepository.findById(requestDTO.getStateId());
+        if(optionalState.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", requestDTO.getStateId()));
+
+        City city = new City();
+        city.setName(requestDTO.getName());
+        city.setState(optionalState.get());
         city = repository.save(city);
 
         return modelMapper.map(city, CityResponseDTO.class);
@@ -54,10 +64,12 @@ public class CityServiceImpl implements CityService {
         Optional<City> optionalCity = repository.findById(id);
         if(optionalCity.isEmpty()) throw new CityNotFoundException(String.format("City with id %d not found", id));
 
+        Optional<State> optionalState = stateRepository.findById(requestDTO.getStateId());
+        if(optionalState.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", requestDTO.getStateId()));
+
         City city = optionalCity.get();
         city.setName(requestDTO.getName());
-        city.setState(requestDTO.getState());
-
+        city.setState(optionalState.get());
         city = repository.save(city);
 
         return modelMapper.map(city, CityResponseDTO.class);
