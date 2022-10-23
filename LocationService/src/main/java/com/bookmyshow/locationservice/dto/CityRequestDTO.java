@@ -3,9 +3,15 @@ package com.bookmyshow.locationservice.dto;
 
 import com.bookmyshow.locationservice.dao.entity.State;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class CityRequestDTO {
 
+    @NotBlank
     private String name;
+
+    @NotNull
     private Long stateId;
 
     public CityRequestDTO() {
