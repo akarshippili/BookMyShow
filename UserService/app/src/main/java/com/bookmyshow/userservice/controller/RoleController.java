@@ -21,17 +21,17 @@ public class RoleController {
 
     @PostMapping(path = "/roles")
     public ResponseEntity<RoleResponseDTO> addRole(@Valid @RequestBody RoleRequestDTO role){
-        return new ResponseEntity(service.addRole(role), HttpStatus.CREATED);
+        return new ResponseEntity(service.save(role), HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/roles/{id}")
     public ResponseEntity<RoleResponseDTO> getRole(@PathVariable Long id) {
-        return new ResponseEntity<>(service.getRoleById(id), HttpStatus.OK);
+        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @GetMapping(path = "/roles/{id}/permissions")
     public ResponseEntity<List<PermissionResponseDTO>> getPermissionOfRole(@PathVariable Long id) {
-        return new ResponseEntity<>(service.getPermissionOfRole(id), HttpStatus.OK);
+        return new ResponseEntity<>(service.findPermissionsById(id), HttpStatus.OK);
     }
 
     @PostMapping(path = "/roles/{id}/permissions")
@@ -48,7 +48,7 @@ public class RoleController {
 
     @GetMapping(path = "/roles")
     public ResponseEntity<List<RoleResponseDTO>> getAllRoles() {
-        return new ResponseEntity<>(service.getAllRoles(), HttpStatus.OK);
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @PutMapping(path = "/roles/{id}")
