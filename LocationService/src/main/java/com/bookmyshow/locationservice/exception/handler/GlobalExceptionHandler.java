@@ -1,6 +1,7 @@
 package com.bookmyshow.locationservice.exception.handler;
 
 import com.bookmyshow.locationservice.exception.CityNotFoundException;
+import com.bookmyshow.locationservice.exception.LocationNotFoundException;
 import com.bookmyshow.locationservice.exception.StateNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({StateNotFoundException.class, CityNotFoundException.class})
+    @ExceptionHandler({StateNotFoundException.class, CityNotFoundException.class, LocationNotFoundException.class})
     public ResponseEntity<ErrorDetails> handleNotFoundException(RuntimeException exception, WebRequest request){
         return new ResponseEntity<>(new ErrorDetails(exception.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI()), HttpStatus.NOT_FOUND);
     }
