@@ -20,17 +20,17 @@ public class PermissionController {
 
     @PostMapping(path = "/permissions")
     public ResponseEntity<PermissionResponseDTO> addPermission(@Valid @RequestBody PermissionRequestDTO permissionRequestDTO){
-        return new ResponseEntity( service.addPermission(permissionRequestDTO) , HttpStatus.CREATED);
+        return new ResponseEntity( service.save(permissionRequestDTO) , HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/permissions")
     public ResponseEntity<List<PermissionResponseDTO>> getAllPermissions() {
-        return new ResponseEntity<>( service.getAllPermissions() , HttpStatus.OK);
+        return new ResponseEntity<>( service.findAll() , HttpStatus.OK);
     }
 
     @GetMapping(path = "/permissions/{id}")
     public ResponseEntity<PermissionResponseDTO> getAllPermissions(@PathVariable Long id) {
-        return new ResponseEntity<>( service.getPermissionById(id) , HttpStatus.OK);
+        return new ResponseEntity<>( service.findById(id) , HttpStatus.OK);
     }
 
     @PutMapping(path = "/permissions/{id}")
