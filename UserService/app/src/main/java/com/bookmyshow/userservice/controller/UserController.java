@@ -21,17 +21,17 @@ public class UserController {
 
     @PostMapping(path = "/users")
     public ResponseEntity<UserResponseDTO> addUser(@Valid @RequestBody UserRequestDTO userRequestDTO){
-        return new ResponseEntity<>(service.addUser(userRequestDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.save(userRequestDTO), HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/users")
     public ResponseEntity<List<UserResponseDTO>> getAllUsers(){
-        return new ResponseEntity<>(service.getAllUsers(), HttpStatus.OK);
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/users/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id){
-        return new ResponseEntity<>(service.getUserById(id), HttpStatus.OK);
+        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @PutMapping(path = "/users/{id}")
