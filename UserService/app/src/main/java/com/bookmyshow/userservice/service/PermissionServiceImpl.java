@@ -48,7 +48,7 @@ public class PermissionServiceImpl implements PermissionService {
         if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(String.format("Permission with id: %d not found", id));
 
         Permission permission = optionalPermission.get();
-        permission.setPermissionCode(permissionRequestDTO.getPermissionCode());
+        permission.setCode(permissionRequestDTO.getCode());
         permission.setPermissionDescription(permissionRequestDTO.getPermissionDescription());
         repository.save(permission);
 
