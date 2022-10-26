@@ -5,9 +5,13 @@ import com.bookmyshow.userservice.dto.RoleRequestDTO;
 import com.bookmyshow.userservice.dto.RoleResponseDTO;
 import com.bookmyshow.userservice.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +31,16 @@ public class RoleController {
             summary = "Create a new role",
             description = "Create a new role"
     )
+    @ApiResponse(responseCode = "201",
+            description = "successfully created a new resource role",
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = RoleResponseDTO.class)
+            )
+    )
     @PostMapping(path = "/roles")
     public ResponseEntity<RoleResponseDTO> addRole(@Valid @RequestBody RoleRequestDTO role){
-        return new ResponseEntity(service.save(role), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.save(role), HttpStatus.CREATED);
     }
 
     @Tag(name = "Roles")
