@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({RoleNotFoundException.class, PermissionNotFoundException.class, UserNotFoundException.class})
-    public ResponseEntity<ErrorDetails> handleNotFoundException(RuntimeException exception, WebRequest request){
-        return new ResponseEntity<>(new ErrorDetails(exception.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI()), HttpStatus.NOT_FOUND);
+    public ResponseEntity<APIError> handleNotFoundException(RuntimeException exception, WebRequest request){
+        return new ResponseEntity<>(new APIError(exception.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI()), HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                     else return "";
                 }));
 
-        return new ResponseEntity<>(new ErrorDetails(ex.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI(), errorMap), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new APIError(ex.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI(), errorMap), HttpStatus.BAD_REQUEST);
     }
 
 }

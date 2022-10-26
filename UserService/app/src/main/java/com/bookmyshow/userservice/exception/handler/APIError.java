@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.Date;
 import java.util.Map;
 
-public class ErrorDetails {
+public class APIError {
 
     private String message;
     private String path;
@@ -14,13 +14,13 @@ public class ErrorDetails {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Map<String, String> errorMap;
 
-    public ErrorDetails(String message, String path) {
+    public APIError(String message, String path) {
         this.message = message;
         this.path = path;
         this.timeStamp = new Date();
     }
 
-    public ErrorDetails(String message, String path, Map<String, String> errorMap) {
+    public APIError(String message, String path, Map<String, String> errorMap) {
         this.message = message;
         this.path = path;
         this.timeStamp = new Date();
@@ -29,7 +29,7 @@ public class ErrorDetails {
 
     @Override
     public String toString() {
-        return "ErrorDetails{" +
+        return "APIError{" +
                 "message='" + message + '\'' +
                 ", path='" + path + '\'' +
                 ", timeStamp=" + timeStamp +
