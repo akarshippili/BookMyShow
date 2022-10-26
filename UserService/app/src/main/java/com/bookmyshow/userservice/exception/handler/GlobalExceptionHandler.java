@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -21,11 +22,13 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({RoleNotFoundException.class, PermissionNotFoundException.class, UserNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<APIError> handleNotFoundException(RuntimeException exception, WebRequest request){
         return new ResponseEntity<>(new APIError(exception.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI()), HttpStatus.NOT_FOUND);
     }
 
     @Override
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
         Map<String, String> errorMap = ex.getBindingResult().getFieldErrors().stream()
