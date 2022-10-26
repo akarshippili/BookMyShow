@@ -49,5 +49,5 @@ dependencyManagement {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.bookmyshow.userservice.App'
+    mainClass = 'com.bookmyshow.userservice.UserServiceMain'
 }
