@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class PermissionResponseDTO {
 
     private Long id;
-    private String permissionCode;
+    private String code;
     private String permissionDescription;
 
     public PermissionResponseDTO() {
@@ -20,7 +20,7 @@ public class PermissionResponseDTO {
     public String toString() {
         return "PermissionResponseDTO{" +
                 "id=" + id +
-                ", permissionCode='" + permissionCode + '\'' +
+                ", code='" + code + '\'' +
                 ", permissionDescription='" + permissionDescription + '\'' +
                 '}';
     }
@@ -33,12 +33,12 @@ public class PermissionResponseDTO {
         this.id = id;
     }
 
-    public String getPermissionCode() {
-        return permissionCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setPermissionCode(String permissionCode) {
-        this.permissionCode = permissionCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getPermissionDescription() {

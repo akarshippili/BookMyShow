@@ -1,7 +1,6 @@
 package com.bookmyshow.userservice.dao.entity;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Table(name = "PERMISSION")
@@ -12,8 +11,8 @@ public class Permission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "PERMISSION_CODE")
-    private String permissionCode;
+    @Column(name = "CODE")
+    private String code;
 
     @Column(name = "PERMISSION_DESCRIPTION")
     private String permissionDescription;
@@ -29,12 +28,12 @@ public class Permission {
         this.id = id;
     }
 
-    public String getPermissionCode() {
-        return permissionCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setPermissionCode(String permissionCode) {
-        this.permissionCode = permissionCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getPermissionDescription() {
@@ -53,7 +52,7 @@ public class Permission {
     public String toString() {
         return "Permission{" +
                 "id=" + id +
-                ", permissionCode='" + permissionCode + '\'' +
+                ", code='" + code + '\'' +
                 ", permissionDescription='" + permissionDescription + '\'' +
                 '}';
     }

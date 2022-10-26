@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 public class PermissionRequestDTO {
 
     @NotBlank
-    private String permissionCode;
+    private String code;
 
     @NotBlank
     private String permissionDescription;
@@ -22,17 +22,17 @@ public class PermissionRequestDTO {
     @Override
     public String toString() {
         return "PermissionRequestDTO{" +
-                "permissionCode='" + permissionCode + '\'' +
+                "code='" + code + '\'' +
                 ", permissionDescription='" + permissionDescription + '\'' +
                 '}';
     }
 
-    public String getPermissionCode() {
-        return permissionCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setPermissionCode(String permissionCode) {
-        this.permissionCode = permissionCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getPermissionDescription() {
