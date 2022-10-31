@@ -1,8 +1,9 @@
 package com.bookmyshow.userservice.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserResponseDTO {
+public class UserResponseDTO implements Serializable {
 
     private Long id;
     private String firstName;

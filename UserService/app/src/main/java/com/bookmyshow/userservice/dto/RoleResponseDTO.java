@@ -2,12 +2,14 @@ package com.bookmyshow.userservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.io.Serializable;
+
 @JsonPropertyOrder({
         "id",
         "role",
         "roleDescription"
 })
-public class RoleResponseDTO {
+public class RoleResponseDTO implements Serializable {
 
     private Long id;
 

@@ -3,12 +3,13 @@ package com.bookmyshow.userservice.dto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @JsonPropertyOrder({
         "permissionCode",
         "permissionDescription"
 })
-public class PermissionRequestDTO {
+public class PermissionRequestDTO implements Serializable {
 
     @NotBlank
     private String code;

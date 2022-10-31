@@ -1,8 +1,9 @@
 package com.bookmyshow.userservice.dto;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
-public class RoleRequestDTO {
+public class RoleRequestDTO implements Serializable {
 
     @NotBlank(message = "Role must not be empty")
     private String role;

@@ -1,8 +1,9 @@
 package com.bookmyshow.userservice.dto;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
-public class UserRequestDTO {
+public class UserRequestDTO implements Serializable {
 
     @NotBlank
     private String firstName;
