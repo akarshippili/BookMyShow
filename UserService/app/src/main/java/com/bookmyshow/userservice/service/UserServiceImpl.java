@@ -6,9 +6,8 @@ import com.bookmyshow.userservice.dao.repo.RoleRepository;
 import com.bookmyshow.userservice.dao.repo.UserRepository;
 import com.bookmyshow.userservice.dto.UserRequestDTO;
 import com.bookmyshow.userservice.dto.UserResponseDTO;
-import com.bookmyshow.userservice.exception.UserNotFoundException;
 import com.bookmyshow.userservice.exception.RoleNotFoundException;
-import org.modelmapper.ModelMapper;
+import com.bookmyshow.userservice.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +16,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends AbstractService implements UserService {
 
     @Autowired
     private UserRepository repository;
 
     @Autowired
     private RoleRepository roleRepository;
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     public UserResponseDTO save(UserRequestDTO userRequestDTO){
 

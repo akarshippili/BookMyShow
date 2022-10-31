@@ -8,21 +8,17 @@ import com.bookmyshow.userservice.dto.PermissionResponseDTO;
 import com.bookmyshow.userservice.dto.RoleRequestDTO;
 import com.bookmyshow.userservice.dto.RoleResponseDTO;
 import com.bookmyshow.userservice.exception.PermissionNotFoundException;
-import org.modelmapper.ModelMapper;
+import com.bookmyshow.userservice.exception.RoleNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bookmyshow.userservice.exception.RoleNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class RoleServiceImpl implements RoleService {
-
-    @Autowired
-    private ModelMapper modelMapper;
+public class RoleServiceImpl extends AbstractService implements RoleService {
 
     @Autowired
     private RoleRepository repository;

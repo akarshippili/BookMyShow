@@ -5,7 +5,6 @@ import com.bookmyshow.userservice.dao.repo.PermissionRepository;
 import com.bookmyshow.userservice.dto.PermissionRequestDTO;
 import com.bookmyshow.userservice.dto.PermissionResponseDTO;
 import com.bookmyshow.userservice.exception.PermissionNotFoundException;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class PermissionServiceImpl implements PermissionService {
-
-    @Autowired
-    private ModelMapper modelMapper;
+public class PermissionServiceImpl extends AbstractService implements PermissionService  {
 
     @Autowired
     private PermissionRepository repository;
