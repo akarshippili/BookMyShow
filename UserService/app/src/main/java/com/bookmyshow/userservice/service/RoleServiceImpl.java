@@ -48,7 +48,7 @@ public class RoleServiceImpl implements RoleService {
     public RoleResponseDTO findById(Long id){
         Optional<Role> roleOptional = repository.findById(id);
         if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(String.format("Role of %d is not found", id));
+            throw new RoleNotFoundException(id);
         }
         return modelMapper.map(roleOptional.get(), RoleResponseDTO.class);
     }
@@ -56,7 +56,7 @@ public class RoleServiceImpl implements RoleService {
     public List<PermissionResponseDTO> findPermissionsById(Long id){
         Optional<Role> roleOptional = repository.findById(id);
         if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(String.format("Role of %d is not found", id));
+            throw new RoleNotFoundException(id);
         }
 
         Role role = roleOptional.get();
@@ -70,14 +70,14 @@ public class RoleServiceImpl implements RoleService {
     public void addPermissionsToRole(Long id, List<Long> permissionIds){
         Optional<Role> roleOptional = repository.findById(id);
         if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(String.format("Role of %d is not found", id));
+            throw new RoleNotFoundException(id);
         }
 
         Set<Permission> permissions =  permissionIds
                 .stream()
                 .map(permissionId -> {
                     Optional<Permission> optionalPermission =  permissionRepository.findById(permissionId);
-                    if (optionalPermission.isEmpty()) throw new PermissionNotFoundException(String.format("Permission of %d is not found", id));
+                    if (optionalPermission.isEmpty()) throw new PermissionNotFoundException(id);
                     return optionalPermission.get();
                 })
                 .collect(Collectors.toSet());
@@ -90,14 +90,14 @@ public class RoleServiceImpl implements RoleService {
     public void deletePermissionToRole(Long id, List<Long> permissionIds){
         Optional<Role> roleOptional = repository.findById(id);
         if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(String.format("Role of %d is not found", id));
+            throw new RoleNotFoundException(id);
         }
 
         Set<Permission> permissions =  permissionIds
                 .stream()
                 .map(permissionId -> {
                     Optional<Permission> optionalPermission =  permissionRepository.findById(permissionId);
-                    if (optionalPermission.isEmpty()) throw new PermissionNotFoundException(String.format("Permission of %d is not found", id));
+                    if (optionalPermission.isEmpty()) throw new PermissionNotFoundException(id);
                     return optionalPermission.get();
                 })
                 .collect(Collectors.toSet());
@@ -112,7 +112,7 @@ public class RoleServiceImpl implements RoleService {
     public RoleResponseDTO update(Long id, RoleRequestDTO roleRequestDTO){
         Optional<Role> roleOptional = repository.findById(id);
         if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(String.format("Role of %d is not found", id));
+            throw new RoleNotFoundException(id);
         }
 
         Role role = roleOptional.get();
@@ -126,7 +126,7 @@ public class RoleServiceImpl implements RoleService {
     public void delete(Long id){
         Optional<Role> roleOptional = repository.findById(id);
         if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(String.format("Role of %d is not found", id));
+            throw new RoleNotFoundException(id);
         }
 
         repository.delete(roleOptional.get());

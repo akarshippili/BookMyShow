@@ -38,14 +38,14 @@ public class PermissionServiceImpl implements PermissionService {
 
     public PermissionResponseDTO findById(Long id){
         Optional<Permission> optionalPermission = repository.findById(id);
-        if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(String.format("Permission with id: %d not found", id));
+        if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(id);
 
         return modelMapper.map(optionalPermission.get(), PermissionResponseDTO.class);
     }
 
     public PermissionResponseDTO update(Long id, PermissionRequestDTO permissionRequestDTO){
         Optional<Permission> optionalPermission = repository.findById(id);
-        if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(String.format("Permission with id: %d not found", id));
+        if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(id);
 
         Permission permission = optionalPermission.get();
         permission.setCode(permissionRequestDTO.getCode());
@@ -57,7 +57,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     public void delete(Long id){
         Optional<Permission> optionalPermission = repository.findById(id);
-        if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(String.format("Permission with id: %d not found", id));
+        if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(id);
 
         repository.delete(optionalPermission.get());
     }

@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
         if(userRequestDTO.getRoleId()!=null){
             Optional<Role> optionalRole = roleRepository.findById(userRequestDTO.getRoleId());
-            if(optionalRole.isEmpty()) throw new RoleNotFoundException(String.format("Role of %d is not found", userRequestDTO.getRoleId()));
+            if(optionalRole.isEmpty()) throw new RoleNotFoundException(userRequestDTO.getRoleId());
         }
 
         User user = modelMapper.map(userRequestDTO, User.class);
@@ -49,20 +49,20 @@ public class UserServiceImpl implements UserService {
 
     public UserResponseDTO findById(Long id){
         Optional<User> optionalUser = repository.findById(id);
-        if(optionalUser.isEmpty()) throw new UserNotFoundException(String.format("User with this %d is not found", id));
+        if(optionalUser.isEmpty()) throw new UserNotFoundException(id);
 
         return modelMapper.map(optionalUser.get(), UserResponseDTO.class);
     }
 
     public UserResponseDTO update(Long id, UserRequestDTO userRequestDTO)  {
         Optional<User> optionalUser = repository.findById(id);
-        if(optionalUser.isEmpty()) throw new UserNotFoundException(String.format("Role of %d is not found", id));
+        if(optionalUser.isEmpty()) throw new UserNotFoundException(id);
 
         User user = optionalUser.get();
 
         if(userRequestDTO.getRoleId()!=null){
             Optional<Role> optionalRole = roleRepository.findById(userRequestDTO.getRoleId());
-            if(optionalRole.isEmpty()) throw new RoleNotFoundException(String.format("Role of %d is not found", id));
+            if(optionalRole.isEmpty()) throw new RoleNotFoundException(userRequestDTO.getRoleId());
             else user.setRole(optionalRole.get());
         }
 
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
     public void delete(Long id){
         Optional<User> optionalUser = repository.findById(id);
-        if(optionalUser.isEmpty()) throw new UserNotFoundException(String.format("User with this %d is not found", id));
+        if(optionalUser.isEmpty()) throw new UserNotFoundException(id);
 
         repository.delete(optionalUser.get());
     }
