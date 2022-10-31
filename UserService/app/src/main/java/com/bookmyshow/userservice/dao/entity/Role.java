@@ -1,12 +1,11 @@
 package com.bookmyshow.userservice.dao.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Table(name = "ROLE")
 @Entity
-public class Role implements Serializable {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
