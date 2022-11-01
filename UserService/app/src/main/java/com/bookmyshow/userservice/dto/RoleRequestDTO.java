@@ -8,11 +8,11 @@ public class RoleRequestDTO implements Serializable {
     @NotBlank(message = "Role must not be empty")
     private String role;
 
-    private String roleDescription;
+    private String description;
 
-    public RoleRequestDTO(String role, String roleDescription) {
+    public RoleRequestDTO(String role, String description) {
         this.role = role;
-        this.roleDescription = roleDescription;
+        this.description = description;
     }
 
 
@@ -24,19 +24,14 @@ public class RoleRequestDTO implements Serializable {
         this.role = role;
     }
 
-    public String getRoleDescription() {
-        return roleDescription;
-    }
-
-    public void setRoleDescription(String roleDescription) {
-        this.roleDescription = roleDescription;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     @Override
     public String toString() {
         return "RoleRequestDTO{" +
                 "role='" + role + '\'' +
-                ", roleDescription='" + roleDescription + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

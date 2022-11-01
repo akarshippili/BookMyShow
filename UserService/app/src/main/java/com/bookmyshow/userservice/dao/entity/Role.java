@@ -14,8 +14,8 @@ public class Role {
     @Column(name = "ROLE", unique = true)
     private String role;
 
-    @Column(name = "ROLE_DESCRIPTION")
-    private String roleDescription;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -43,12 +43,12 @@ public class Role {
         this.role = role;
     }
 
-    public String getRoleDescription() {
-        return roleDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setRoleDescription(String roleDescription) {
-        this.roleDescription = roleDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<Permission> getPermissions() {
@@ -60,7 +60,7 @@ public class Role {
         return "Role{" +
                 "id=" + id +
                 ", role='" + role + '\'' +
-                ", roleDescription='" + roleDescription + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

@@ -7,7 +7,7 @@ import java.io.Serializable;
 @JsonPropertyOrder({
         "id",
         "role",
-        "roleDescription"
+        "description"
 })
 public class RoleResponseDTO implements Serializable {
 
@@ -15,23 +15,23 @@ public class RoleResponseDTO implements Serializable {
 
     private String role;
 
-    private String roleDescription;
+    private String description;
 
     public RoleResponseDTO() {
     }
 
-    public RoleResponseDTO(Long id, String role, String roleDescription) {
+    public RoleResponseDTO(Long id, String role, String description) {
         this.id = id;
         this.role = role;
-        this.roleDescription = roleDescription;
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return "RoleDTO{" +
+        return "RoleResponseDTO{" +
                 "id=" + id +
                 ", role='" + role + '\'' +
-                ", roleDescription='" + roleDescription + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 
@@ -51,11 +51,11 @@ public class RoleResponseDTO implements Serializable {
         this.role = role;
     }
 
-    public String getRoleDescription() {
-        return roleDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setRoleDescription(String roleDescription) {
-        this.roleDescription = roleDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

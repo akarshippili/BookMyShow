@@ -113,7 +113,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 
         Role role = roleOptional.get();
         role.setRole(roleRequestDTO.getRole());
-        role.setRoleDescription(roleRequestDTO.getRoleDescription());
+        role.setDescription(roleRequestDTO.getDescription());
 
         repository.save(role);
         return modelMapper.map(role, RoleResponseDTO.class);
