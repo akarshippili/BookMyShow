@@ -3,7 +3,7 @@ package com.bookmyshow.userservice.dao.entity;
 import javax.persistence.*;
 import java.util.Set;
 
-@Table(name = "PERMISSION")
+@Table(name = "T_PERMISSION")
 @Entity
 public class Permission {
 

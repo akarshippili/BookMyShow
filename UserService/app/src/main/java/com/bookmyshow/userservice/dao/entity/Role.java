@@ -3,7 +3,7 @@ package com.bookmyshow.userservice.dao.entity;
 import javax.persistence.*;
 import java.util.Set;
 
-@Table(name = "ROLE")
+@Table(name = "T_ROLE")
 @Entity
 public class Role {
 
@@ -19,7 +19,7 @@ public class Role {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "ROLE_PERMISSION_TABLE",
+            name = "T_ROLE_PERMISSION",
             joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "id"))
     private Set<Permission> permissions;
