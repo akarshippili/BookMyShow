@@ -45,7 +45,7 @@ public class PermissionServiceImpl extends AbstractService implements Permission
 
         Permission permission = optionalPermission.get();
         permission.setCode(permissionRequestDTO.getCode());
-        permission.setPermissionDescription(permissionRequestDTO.getPermissionDescription());
+        permission.setDescription(permissionRequestDTO.getDescription());
         repository.save(permission);
 
         return modelMapper.map(permission, PermissionResponseDTO.class);

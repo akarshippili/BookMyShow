@@ -15,7 +15,7 @@ public class PermissionRequestDTO implements Serializable {
     private String code;
 
     @NotBlank
-    private String permissionDescription;
+    private String description;
 
     public PermissionRequestDTO() {
     }
@@ -24,7 +24,7 @@ public class PermissionRequestDTO implements Serializable {
     public String toString() {
         return "PermissionRequestDTO{" +
                 "code='" + code + '\'' +
-                ", permissionDescription='" + permissionDescription + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 
@@ -36,12 +36,11 @@ public class PermissionRequestDTO implements Serializable {
         this.code = code;
     }
 
-    public String getPermissionDescription() {
-        return permissionDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPermissionDescription(String permissionDescription) {
-        this.permissionDescription = permissionDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
 }

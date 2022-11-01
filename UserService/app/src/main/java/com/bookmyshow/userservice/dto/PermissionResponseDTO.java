@@ -13,7 +13,7 @@ public class PermissionResponseDTO implements Serializable {
 
     private Long id;
     private String code;
-    private String permissionDescription;
+    private String description;
 
     public PermissionResponseDTO() {
     }
@@ -23,7 +23,7 @@ public class PermissionResponseDTO implements Serializable {
         return "PermissionResponseDTO{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
-                ", permissionDescription='" + permissionDescription + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 
@@ -43,12 +43,12 @@ public class PermissionResponseDTO implements Serializable {
         this.code = code;
     }
 
-    public String getPermissionDescription() {
-        return permissionDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPermissionDescription(String permissionDescription) {
-        this.permissionDescription = permissionDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

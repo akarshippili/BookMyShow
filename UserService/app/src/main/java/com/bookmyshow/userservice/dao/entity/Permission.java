@@ -14,8 +14,8 @@ public class Permission {
     @Column(name = "CODE")
     private String code;
 
-    @Column(name = "PERMISSION_DESCRIPTION")
-    private String permissionDescription;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     @ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY)
     private Set<Role> roles;
@@ -36,12 +36,12 @@ public class Permission {
         this.code = code;
     }
 
-    public String getPermissionDescription() {
-        return permissionDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPermissionDescription(String permissionDescription) {
-        this.permissionDescription = permissionDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<Role> getRoles() {
@@ -53,7 +53,7 @@ public class Permission {
         return "Permission{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
-                ", permissionDescription='" + permissionDescription + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
