@@ -1,8 +1,6 @@
 package com.bookmyshow.userservice.exception.handler;
 
-import com.bookmyshow.userservice.exception.PermissionNotFoundException;
-import com.bookmyshow.userservice.exception.RoleNotFoundException;
-import com.bookmyshow.userservice.exception.UserNotFoundException;
+import com.bookmyshow.userservice.exception.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +19,7 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({RoleNotFoundException.class, PermissionNotFoundException.class, UserNotFoundException.class})
+    @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<APIError> handleNotFoundException(RuntimeException exception, WebRequest request){
         return new ResponseEntity<>(new APIError(exception.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI()), HttpStatus.NOT_FOUND);
