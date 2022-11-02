@@ -6,8 +6,8 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @JsonPropertyOrder({
-        "permissionCode",
-        "permissionDescription"
+        "code",
+        "description"
 })
 public class PermissionRequestDTO implements Serializable {
 

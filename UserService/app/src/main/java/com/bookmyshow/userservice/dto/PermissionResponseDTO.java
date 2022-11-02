@@ -6,8 +6,8 @@ import java.io.Serializable;
 
 @JsonPropertyOrder({
         "id",
-        "permissionCode",
-        "permissionDescription"
+        "code",
+        "description"
 })
 public class PermissionResponseDTO implements Serializable {
 
