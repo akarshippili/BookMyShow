@@ -19,8 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/v1")
-public class RoleController {
+public class RoleController extends AbstractController{
 
     private final RoleService service;
 

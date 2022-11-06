@@ -19,8 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(path = "/api/v1")
-public class UserController {
+public class UserController extends AbstractController {
     private final UserService service;
 
     public UserController(@Autowired UserService service) {

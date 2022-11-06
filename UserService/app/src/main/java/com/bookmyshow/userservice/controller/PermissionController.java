@@ -18,8 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/v1")
-public class PermissionController {
+public class PermissionController extends AbstractController {
 
     private final PermissionService service;
 
