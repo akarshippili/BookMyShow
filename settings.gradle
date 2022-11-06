@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'BookMyShow'
-include('UserService', 'LocationService')
+include('UserService', 'LocationService', 'ConfigServer')
