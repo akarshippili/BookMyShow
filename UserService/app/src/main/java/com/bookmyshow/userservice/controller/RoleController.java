@@ -22,8 +22,11 @@ import java.util.List;
 @RequestMapping(path = "/api/v1")
 public class RoleController {
 
-    @Autowired
-    private RoleService service;
+    private final RoleService service;
+
+    public RoleController(@Autowired RoleService service) {
+        this.service = service;
+    }
 
     @Tag(name = "Roles")
     @Operation(

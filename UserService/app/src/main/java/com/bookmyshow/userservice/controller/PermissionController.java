@@ -21,8 +21,11 @@ import java.util.List;
 @RequestMapping(path = "/api/v1")
 public class PermissionController {
 
-    @Autowired
-    private PermissionService service;
+    private final PermissionService service;
+
+    public PermissionController(@Autowired PermissionService service) {
+        this.service = service;
+    }
 
     @Tag(name = "Permissions")
     @Operation(

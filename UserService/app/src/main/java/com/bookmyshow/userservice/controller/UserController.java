@@ -21,10 +21,11 @@ import java.util.Objects;
 @RestController
 @RequestMapping(path = "/api/v1")
 public class UserController {
+    private final UserService service;
 
-    @Autowired
-    private UserService service;
-
+    public UserController(@Autowired UserService service) {
+        this.service = service;
+    }
 
     @Tag(name = "Users")
     @Operation(
