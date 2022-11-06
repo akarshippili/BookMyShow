@@ -1,7 +1,5 @@
 package com.bookmyshow.locationservice.dto;
 
-import com.bookmyshow.locationservice.dao.entity.City;
-
 public class LocationResponseDTO {
 
     private Long locationId;

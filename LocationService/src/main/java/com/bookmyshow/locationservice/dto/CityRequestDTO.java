@@ -1,8 +1,6 @@
 package com.bookmyshow.locationservice.dto;
 
 
-import com.bookmyshow.locationservice.dao.entity.State;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 

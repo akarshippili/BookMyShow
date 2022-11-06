@@ -1,10 +1,5 @@
 package com.bookmyshow.locationservice.dto;
 
-import com.bookmyshow.locationservice.dao.entity.City;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 

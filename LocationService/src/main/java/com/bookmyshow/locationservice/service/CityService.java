@@ -2,9 +2,6 @@ package com.bookmyshow.locationservice.service;
 
 import com.bookmyshow.locationservice.dto.CityRequestDTO;
 import com.bookmyshow.locationservice.dto.CityResponseDTO;
-import com.bookmyshow.locationservice.dto.StateRequestDTO;
-import com.bookmyshow.locationservice.dto.StateResponseDTO;
-
 import java.util.List;
 
 public interface CityService {
