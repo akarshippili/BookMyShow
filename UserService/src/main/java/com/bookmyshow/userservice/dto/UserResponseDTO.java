@@ -1,7 +1,7 @@
 package com.bookmyshow.userservice.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class UserResponseDTO implements Serializable {
 
@@ -10,7 +10,7 @@ public class UserResponseDTO implements Serializable {
     private String lastName;
     private String email;
     private Long roleId;
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
 
     public UserResponseDTO() {
@@ -68,11 +68,11 @@ public class UserResponseDTO implements Serializable {
         this.email = email;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }

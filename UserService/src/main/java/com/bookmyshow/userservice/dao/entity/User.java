@@ -3,7 +3,7 @@ package com.bookmyshow.userservice.dao.entity;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Table(name = "T_USER")
 @Entity
@@ -28,7 +28,7 @@ public class User {
 
     @Column(name = "CREATED_AT")
     @CreationTimestamp
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
 
     public Long getId() {
@@ -71,11 +71,11 @@ public class User {
         this.role = role;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
