@@ -15,8 +15,11 @@ import java.util.stream.Collectors;
 @Service
 public class PermissionServiceImpl extends AbstractService implements PermissionService  {
 
-    @Autowired
     private PermissionRepository repository;
+
+    public PermissionServiceImpl(@Autowired PermissionRepository repository) {
+        this.repository = repository;
+    }
 
     public PermissionResponseDTO save(PermissionRequestDTO permissionRequestDTO){
         Permission permission = modelMapper.map(permissionRequestDTO, Permission.class);
