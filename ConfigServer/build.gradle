@@ -41,7 +41,7 @@ dependencyManagement {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.bookmyshow.configserver.App'
+    mainClass = 'com.movieTicketService.configserver.App'
 }
 
 tasks.named('test') {
