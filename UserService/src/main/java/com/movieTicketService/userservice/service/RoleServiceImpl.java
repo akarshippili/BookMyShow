@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 @Service
 public class RoleServiceImpl extends AbstractService implements RoleService {
 
-    private RoleRepository repository;
-    private PermissionRepository permissionRepository;
+    private final RoleRepository repository;
+    private final PermissionRepository permissionRepository;
 
     public RoleServiceImpl(@Autowired RoleRepository repository, @Autowired PermissionRepository permissionRepository) {
         this.repository = repository;
