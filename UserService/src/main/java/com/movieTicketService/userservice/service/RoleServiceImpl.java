@@ -20,11 +20,13 @@ import java.util.stream.Collectors;
 @Service
 public class RoleServiceImpl extends AbstractService implements RoleService {
 
-    @Autowired
     private RoleRepository repository;
-
-    @Autowired
     private PermissionRepository permissionRepository;
+
+    public RoleServiceImpl(@Autowired RoleRepository repository, @Autowired PermissionRepository permissionRepository) {
+        this.repository = repository;
+        this.permissionRepository = permissionRepository;
+    }
 
     public RoleResponseDTO save(RoleRequestDTO roleRequestDTO){
         Role roleEntity = modelMapper.map(roleRequestDTO, Role.class);
@@ -42,20 +44,11 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
     }
 
     public RoleResponseDTO findById(Long id){
-        Optional<Role> roleOptional = repository.findById(id);
-        if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(id);
-        }
-        return modelMapper.map(roleOptional.get(), RoleResponseDTO.class);
+        return modelMapper.map(getById(id), RoleResponseDTO.class);
     }
 
     public List<PermissionResponseDTO> findPermissionsById(Long id){
-        Optional<Role> roleOptional = repository.findById(id);
-        if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(id);
-        }
-
-        Role role = roleOptional.get();
+        Role role = getById(id);
 
         return role.getPermissions()
                 .stream()
@@ -64,41 +57,15 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
     }
 
     public void addPermissionsToRole(Long id, List<Long> permissionIds){
-        Optional<Role> roleOptional = repository.findById(id);
-        if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(id);
-        }
-
-        Set<Permission> permissions =  permissionIds
-                .stream()
-                .map(permissionId -> {
-                    Optional<Permission> optionalPermission =  permissionRepository.findById(permissionId);
-                    if (optionalPermission.isEmpty()) throw new PermissionNotFoundException(id);
-                    return optionalPermission.get();
-                })
-                .collect(Collectors.toSet());
-
-        Role role = roleOptional.get();
+        Set<Permission> permissions =  getPermissionsByIds(permissionIds);
+        Role role = getById(id);
         permissions.forEach(permission -> role.getPermissions().add(permission));
         repository.save(role);
     }
 
     public void deletePermissionToRole(Long id, List<Long> permissionIds){
-        Optional<Role> roleOptional = repository.findById(id);
-        if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(id);
-        }
-
-        Set<Permission> permissions =  permissionIds
-                .stream()
-                .map(permissionId -> {
-                    Optional<Permission> optionalPermission =  permissionRepository.findById(permissionId);
-                    if (optionalPermission.isEmpty()) throw new PermissionNotFoundException(id);
-                    return optionalPermission.get();
-                })
-                .collect(Collectors.toSet());
-
-        Role role = roleOptional.get();
+        Set<Permission> permissions = getPermissionsByIds(permissionIds);
+        Role role = getById(id);
         permissions.forEach(permission -> role.getPermissions().remove(permission));
         repository.save(role);
     }
@@ -106,12 +73,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 
 
     public RoleResponseDTO update(Long id, RoleRequestDTO roleRequestDTO){
-        Optional<Role> roleOptional = repository.findById(id);
-        if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(id);
-        }
-
-        Role role = roleOptional.get();
+        Role role = getById(id);
         role.setRole(roleRequestDTO.getRole());
         role.setDescription(roleRequestDTO.getDescription());
 
@@ -120,12 +82,23 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
     }
 
     public void delete(Long id){
-        Optional<Role> roleOptional = repository.findById(id);
-        if(roleOptional.isEmpty()) {
-            throw new RoleNotFoundException(id);
-        }
-
-        repository.delete(roleOptional.get());
+        repository.delete(getById(id));
     }
 
+    private Role getById(Long id){
+        Optional<Role> optionalRole = repository.findById(id);
+        if(optionalRole.isEmpty()) throw new RoleNotFoundException(id);
+        return optionalRole.get();
+    }
+
+    private Set<Permission> getPermissionsByIds(List<Long> permissionIds){
+        return permissionIds
+                .stream()
+                .map(permissionId -> {
+                    Optional<Permission> optionalPermission =  permissionRepository.findById(permissionId);
+                    if (optionalPermission.isEmpty()) throw new PermissionNotFoundException(permissionId);
+                    return optionalPermission.get();
+                })
+                .collect(Collectors.toSet());
+    }
 }
