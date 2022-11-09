@@ -36,17 +36,11 @@ public class PermissionServiceImpl extends AbstractService implements Permission
     }
 
     public PermissionResponseDTO findById(Long id){
-        Optional<Permission> optionalPermission = repository.findById(id);
-        if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(id);
-
-        return modelMapper.map(optionalPermission.get(), PermissionResponseDTO.class);
+        return modelMapper.map(getById(id), PermissionResponseDTO.class);
     }
 
     public PermissionResponseDTO update(Long id, PermissionRequestDTO permissionRequestDTO){
-        Optional<Permission> optionalPermission = repository.findById(id);
-        if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(id);
-
-        Permission permission = optionalPermission.get();
+        Permission permission = getById(id);
         permission.setCode(permissionRequestDTO.getCode());
         permission.setDescription(permissionRequestDTO.getDescription());
         repository.save(permission);
@@ -55,10 +49,13 @@ public class PermissionServiceImpl extends AbstractService implements Permission
     }
 
     public void delete(Long id){
+        repository.delete(getById(id));
+    }
+
+    private Permission getById(Long id){
         Optional<Permission> optionalPermission = repository.findById(id);
         if(optionalPermission.isEmpty()) throw new PermissionNotFoundException(id);
-
-        repository.delete(optionalPermission.get());
+        return optionalPermission.get();
     }
 
 }
