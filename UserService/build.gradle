@@ -14,7 +14,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 }
 
-group 'com.bookmyshow.userservice'
+group 'com.movieTicketService.userservice'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -64,5 +64,5 @@ dependencyManagement {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.bookmyshow.userservice.UserServiceMain'
+    mainClass = 'com.movieTicketService.userservice.UserServiceMain'
 }
