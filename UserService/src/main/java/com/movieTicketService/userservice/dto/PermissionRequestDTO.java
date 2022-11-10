@@ -5,10 +5,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
-@JsonPropertyOrder({
-        "code",
-        "description"
-})
 public class PermissionRequestDTO implements Serializable {
 
     @NotBlank
