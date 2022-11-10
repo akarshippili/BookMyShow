@@ -47,7 +47,6 @@ public class UserServiceImpl extends AbstractService implements UserService {
     }
 
     public UserResponseDTO findById(Long id){
-        System.out.println(getById(id));
         return modelMapper.map(getById(id), UserResponseDTO.class);
     }
 
