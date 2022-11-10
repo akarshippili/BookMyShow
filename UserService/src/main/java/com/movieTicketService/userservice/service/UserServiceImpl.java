@@ -26,12 +26,15 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
     public UserResponseDTO save(UserRequestDTO userRequestDTO){
 
+        Role role = null;
         if(userRequestDTO.getRoleId()!=null){
             Optional<Role> optionalRole = roleRepository.findById(userRequestDTO.getRoleId());
             if(optionalRole.isEmpty()) throw new RoleNotFoundException(userRequestDTO.getRoleId());
+            role = optionalRole.get();
         }
 
         User user = modelMapper.map(userRequestDTO, User.class);
+        user.setRole(role);
         user = repository.save(user);
         return modelMapper.map(user, UserResponseDTO.class);
     }
@@ -44,17 +47,12 @@ public class UserServiceImpl extends AbstractService implements UserService {
     }
 
     public UserResponseDTO findById(Long id){
-        Optional<User> optionalUser = repository.findById(id);
-        if(optionalUser.isEmpty()) throw new UserNotFoundException(id);
-
-        return modelMapper.map(optionalUser.get(), UserResponseDTO.class);
+        System.out.println(getById(id));
+        return modelMapper.map(getById(id), UserResponseDTO.class);
     }
 
     public UserResponseDTO update(Long id, UserRequestDTO userRequestDTO)  {
-        Optional<User> optionalUser = repository.findById(id);
-        if(optionalUser.isEmpty()) throw new UserNotFoundException(id);
-
-        User user = optionalUser.get();
+        User user = getById(id);
 
         if(userRequestDTO.getRoleId()!=null){
             Optional<Role> optionalRole = roleRepository.findById(userRequestDTO.getRoleId());
@@ -67,16 +65,19 @@ public class UserServiceImpl extends AbstractService implements UserService {
         user.setEmail(userRequestDTO.getEmail());
 
         user = repository.save(user);
-
         return modelMapper.map(user, UserResponseDTO.class);
     }
 
 
     public void delete(Long id){
+        repository.delete(getById(id));
+    }
+
+    private User getById(Long id) {
         Optional<User> optionalUser = repository.findById(id);
         if(optionalUser.isEmpty()) throw new UserNotFoundException(id);
 
-        repository.delete(optionalUser.get());
+        return optionalUser.get();
     }
 
 
