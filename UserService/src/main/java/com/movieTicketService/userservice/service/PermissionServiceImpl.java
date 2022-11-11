@@ -2,8 +2,7 @@ package com.movieTicketService.userservice.service;
 
 import com.movieTicketService.userservice.dao.entity.Permission;
 import com.movieTicketService.userservice.dao.repo.PermissionRepository;
-import com.movieTicketService.userservice.dto.PermissionRequestDTO;
-import com.movieTicketService.userservice.dto.PermissionResponseDTO;
+import com.movieTicketService.userservice.dto.PermissionDTO;
 import com.movieTicketService.userservice.exception.PermissionNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,31 +18,31 @@ public class PermissionServiceImpl extends AbstractService implements Permission
     private PermissionRepository repository;
 
 
-    public PermissionResponseDTO save(PermissionRequestDTO permissionRequestDTO){
-        Permission permission = modelMapper.map(permissionRequestDTO, Permission.class);
+    public PermissionDTO save(PermissionDTO permissionDTO){
+        Permission permission = modelMapper.map(permissionDTO, Permission.class);
         Permission savedPermission = repository.save(permission);
 
-        return modelMapper.map(savedPermission, PermissionResponseDTO.class);
+        return modelMapper.map(savedPermission, PermissionDTO.class);
     }
 
-    public List<PermissionResponseDTO> findAll(){
+    public List<PermissionDTO> findAll(){
         List<Permission> permissions = repository.findAll();
         return permissions.stream().map(
-                permission -> modelMapper.map(permission, PermissionResponseDTO.class)
+                permission -> modelMapper.map(permission, PermissionDTO.class)
         ).collect(Collectors.toList());
     }
 
-    public PermissionResponseDTO findById(Long id){
-        return modelMapper.map(getById(id), PermissionResponseDTO.class);
+    public PermissionDTO findById(Long id){
+        return modelMapper.map(getById(id), PermissionDTO.class);
     }
 
-    public PermissionResponseDTO update(Long id, PermissionRequestDTO permissionRequestDTO){
+    public PermissionDTO update(Long id, PermissionDTO permissionRequestDTO){
         Permission permission = getById(id);
         permission.setCode(permissionRequestDTO.getCode());
         permission.setDescription(permissionRequestDTO.getDescription());
         repository.save(permission);
 
-        return modelMapper.map(permission, PermissionResponseDTO.class);
+        return modelMapper.map(permission, PermissionDTO.class);
     }
 
     public void delete(Long id){

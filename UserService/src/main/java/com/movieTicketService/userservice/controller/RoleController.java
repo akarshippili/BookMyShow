@@ -1,6 +1,6 @@
 package com.movieTicketService.userservice.controller;
 
-import com.movieTicketService.userservice.dto.PermissionResponseDTO;
+import com.movieTicketService.userservice.dto.PermissionDTO;
 import com.movieTicketService.userservice.dto.RoleRequestDTO;
 import com.movieTicketService.userservice.dto.RoleResponseDTO;
 import com.movieTicketService.userservice.service.RoleService;
@@ -63,7 +63,7 @@ public class RoleController extends AbstractController{
             description = "Get all permissions of a role by id"
     )
     @GetMapping(path = "/roles/{id}/permissions")
-    public ResponseEntity<List<PermissionResponseDTO>> getPermissionOfRole(@PathVariable Long id) {
+    public ResponseEntity<List<PermissionDTO>> getPermissionOfRole(@PathVariable Long id) {
         return new ResponseEntity<>(service.findPermissionsById(id), HttpStatus.OK);
     }
 

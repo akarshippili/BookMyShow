@@ -1,7 +1,6 @@
 package com.movieTicketService.userservice.controller;
 
-import com.movieTicketService.userservice.dto.PermissionRequestDTO;
-import com.movieTicketService.userservice.dto.PermissionResponseDTO;
+import com.movieTicketService.userservice.dto.PermissionDTO;
 import com.movieTicketService.userservice.service.PermissionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -36,12 +35,12 @@ public class PermissionController extends AbstractController {
             description = "successfully created a new resource permission",
             content = @Content(
                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = PermissionResponseDTO.class)
+                    schema = @Schema(implementation = PermissionDTO.class)
             )
     )
     @PostMapping(path = "/permissions")
-    public ResponseEntity<PermissionResponseDTO> addPermission(@Valid @RequestBody PermissionRequestDTO permissionRequestDTO){
-        return new ResponseEntity<>( service.save(permissionRequestDTO) , HttpStatus.CREATED);
+    public ResponseEntity<PermissionDTO> addPermission(@Valid @RequestBody PermissionDTO permissionDTO){
+        return new ResponseEntity<>( service.save(permissionDTO) , HttpStatus.CREATED);
     }
 
     @Tag(name = "Permissions")
@@ -51,7 +50,7 @@ public class PermissionController extends AbstractController {
             description = "Get all permissions"
     )
     @GetMapping(path = "/permissions")
-    public ResponseEntity<List<PermissionResponseDTO>> getAllPermissions() {
+    public ResponseEntity<List<PermissionDTO>> getAllPermissions() {
         return new ResponseEntity<>( service.findAll() , HttpStatus.OK);
     }
 
@@ -62,7 +61,7 @@ public class PermissionController extends AbstractController {
             description = "Get permission by id"
     )
     @GetMapping(path = "/permissions/{id}")
-    public ResponseEntity<PermissionResponseDTO> getAllPermissions(@PathVariable Long id) {
+    public ResponseEntity<PermissionDTO> getAllPermissions(@PathVariable Long id) {
         return new ResponseEntity<>( service.findById(id) , HttpStatus.OK);
     }
 
@@ -73,8 +72,8 @@ public class PermissionController extends AbstractController {
             description = "Update permission by id"
     )
     @PutMapping(path = "/permissions/{id}")
-    public ResponseEntity<PermissionResponseDTO> update(@PathVariable Long id, @Valid @RequestBody PermissionRequestDTO permissionRequestDTO){
-        PermissionResponseDTO updatedPermission = service.update(id, permissionRequestDTO);
+    public ResponseEntity<PermissionDTO> update(@PathVariable Long id, @Valid @RequestBody PermissionDTO permissionDTO){
+        PermissionDTO updatedPermission = service.update(id, permissionDTO);
         return new ResponseEntity<>(updatedPermission, HttpStatus.OK);
     }
 

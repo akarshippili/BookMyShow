@@ -4,7 +4,7 @@ import com.movieTicketService.userservice.dao.entity.Permission;
 import com.movieTicketService.userservice.dao.entity.Role;
 import com.movieTicketService.userservice.dao.repo.PermissionRepository;
 import com.movieTicketService.userservice.dao.repo.RoleRepository;
-import com.movieTicketService.userservice.dto.PermissionResponseDTO;
+import com.movieTicketService.userservice.dto.PermissionDTO;
 import com.movieTicketService.userservice.dto.RoleRequestDTO;
 import com.movieTicketService.userservice.dto.RoleResponseDTO;
 import com.movieTicketService.userservice.exception.PermissionNotFoundException;
@@ -47,12 +47,12 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
         return modelMapper.map(getById(id), RoleResponseDTO.class);
     }
 
-    public List<PermissionResponseDTO> findPermissionsById(Long id){
+    public List<PermissionDTO> findPermissionsById(Long id){
         Role role = getById(id);
 
         return role.getPermissions()
                 .stream()
-                .map(permission -> modelMapper.map(permission, PermissionResponseDTO.class))
+                .map(permission -> modelMapper.map(permission, PermissionDTO.class))
                 .collect(Collectors.toList());
     }
 
