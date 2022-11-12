@@ -4,11 +4,10 @@ import com.movieTicketService.userservice.dao.entity.Role;
 import com.movieTicketService.userservice.dao.entity.User;
 import com.movieTicketService.userservice.dao.repo.RoleRepository;
 import com.movieTicketService.userservice.dao.repo.UserRepository;
-import com.movieTicketService.userservice.dto.UserRequestDTO;
-import com.movieTicketService.userservice.dto.UserResponseDTO;
+import com.movieTicketService.userservice.dto.UserDTO;
 import com.movieTicketService.userservice.exception.RoleNotFoundException;
 import com.movieTicketService.userservice.exception.UserNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,15 +15,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl extends AbstractService implements UserService {
-
-    @Autowired
     private UserRepository repository;
-
-    @Autowired
     private RoleRepository roleRepository;
 
-    public UserResponseDTO save(UserRequestDTO userRequestDTO){
+    public UserDTO save(UserDTO userRequestDTO){
 
         Role role = null;
         if(userRequestDTO.getRoleId()!=null){
@@ -36,21 +32,21 @@ public class UserServiceImpl extends AbstractService implements UserService {
         User user = modelMapper.map(userRequestDTO, User.class);
         user.setRole(role);
         user = repository.save(user);
-        return modelMapper.map(user, UserResponseDTO.class);
+        return modelMapper.map(user, UserDTO.class);
     }
 
-    public List<UserResponseDTO> findAll(){
+    public List<UserDTO> findAll(){
         return repository.findAll()
                 .stream()
-                .map(user -> modelMapper.map(user, UserResponseDTO.class))
+                .map(user -> modelMapper.map(user, UserDTO.class))
                 .collect(Collectors.toList());
     }
 
-    public UserResponseDTO findById(Long id){
-        return modelMapper.map(getById(id), UserResponseDTO.class);
+    public UserDTO findById(Long id){
+        return modelMapper.map(getById(id), UserDTO.class);
     }
 
-    public UserResponseDTO update(Long id, UserRequestDTO userRequestDTO)  {
+    public UserDTO update(Long id, UserDTO userRequestDTO)  {
         User user = getById(id);
 
         if(userRequestDTO.getRoleId()!=null){
@@ -64,7 +60,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
         user.setEmail(userRequestDTO.getEmail());
 
         user = repository.save(user);
-        return modelMapper.map(user, UserResponseDTO.class);
+        return modelMapper.map(user, UserDTO.class);
     }
 
 

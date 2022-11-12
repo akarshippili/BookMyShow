@@ -1,7 +1,6 @@
 package com.movieTicketService.userservice.controller;
 
-import com.movieTicketService.userservice.dto.UserRequestDTO;
-import com.movieTicketService.userservice.dto.UserResponseDTO;
+import com.movieTicketService.userservice.dto.UserDTO;
 import com.movieTicketService.userservice.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -36,11 +35,11 @@ public class UserController extends AbstractController {
             description = "successfully created a new resource user",
             content = @Content(
                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = UserResponseDTO.class)
+                    schema = @Schema(implementation = UserDTO.class)
             )
     )
     @PostMapping(path = "/users")
-    public ResponseEntity<UserResponseDTO> addUser(@Valid @RequestBody UserRequestDTO userRequestDTO){
+    public ResponseEntity<UserDTO> addUser(@Valid @RequestBody UserDTO userRequestDTO){
         return new ResponseEntity<>(service.save(userRequestDTO), HttpStatus.CREATED);
     }
 
@@ -51,7 +50,7 @@ public class UserController extends AbstractController {
             description = "Get all users"
     )
     @GetMapping(path = "/users")
-    public ResponseEntity<List<UserResponseDTO>> getAllUsers(){
+    public ResponseEntity<List<UserDTO>> getAllUsers(){
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
@@ -62,7 +61,7 @@ public class UserController extends AbstractController {
             description = "Get user by id"
     )
     @GetMapping(path = "/users/{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id){
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id){
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
@@ -73,7 +72,7 @@ public class UserController extends AbstractController {
             description = "Update user by id"
     )
     @PutMapping(path = "/users/{id}")
-    public ResponseEntity<UserResponseDTO> update(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO){
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserDTO userRequestDTO){
         return new ResponseEntity<>(service.update(id, userRequestDTO), HttpStatus.OK);
     }
 

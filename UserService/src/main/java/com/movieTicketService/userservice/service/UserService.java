@@ -1,15 +1,14 @@
 package com.movieTicketService.userservice.service;
 
-import com.movieTicketService.userservice.dto.UserRequestDTO;
-import com.movieTicketService.userservice.dto.UserResponseDTO;
+import com.movieTicketService.userservice.dto.UserDTO;
 
 import java.util.List;
 
 public interface UserService {
-    UserResponseDTO save(UserRequestDTO userRequestDTO);
-    List<UserResponseDTO> findAll();
-    UserResponseDTO findById(Long id);
-    UserResponseDTO update(Long id, UserRequestDTO userRequestDTO);
+    UserDTO save(UserDTO userRequestDTO);
+    List<UserDTO> findAll();
+    UserDTO findById(Long id);
+    UserDTO update(Long id, UserDTO userRequestDTO);
     void delete(Long id);
 
 }
