@@ -5,11 +5,10 @@ import com.movieTicketService.userservice.dao.entity.Role;
 import com.movieTicketService.userservice.dao.repo.PermissionRepository;
 import com.movieTicketService.userservice.dao.repo.RoleRepository;
 import com.movieTicketService.userservice.dto.PermissionDTO;
-import com.movieTicketService.userservice.dto.RoleRequestDTO;
-import com.movieTicketService.userservice.dto.RoleResponseDTO;
+import com.movieTicketService.userservice.dto.RoleDTO;
 import com.movieTicketService.userservice.exception.PermissionNotFoundException;
 import com.movieTicketService.userservice.exception.RoleNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,33 +17,29 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class RoleServiceImpl extends AbstractService implements RoleService {
 
     private final RoleRepository repository;
     private final PermissionRepository permissionRepository;
 
-    public RoleServiceImpl(@Autowired RoleRepository repository, @Autowired PermissionRepository permissionRepository) {
-        this.repository = repository;
-        this.permissionRepository = permissionRepository;
-    }
-
-    public RoleResponseDTO save(RoleRequestDTO roleRequestDTO){
-        Role roleEntity = modelMapper.map(roleRequestDTO, Role.class);
-        roleEntity.setRole(roleRequestDTO.getRole().toUpperCase());
+    public RoleDTO save(RoleDTO roleDTO){
+        Role roleEntity = modelMapper.map(roleDTO, Role.class);
+        roleEntity.setRole(roleDTO.getRole().toUpperCase());
 
         Role savedRole = repository.save(roleEntity);
-        return modelMapper.map(savedRole, RoleResponseDTO.class);
+        return modelMapper.map(savedRole, RoleDTO.class);
     }
 
-    public List<RoleResponseDTO> findAll(){
+    public List<RoleDTO> findAll(){
         List<Role> roles = repository.findAll();
         return roles.stream()
-                .map(role -> modelMapper.map(role, RoleResponseDTO.class))
+                .map(role -> modelMapper.map(role, RoleDTO.class))
                 .collect(Collectors.toList());
     }
 
-    public RoleResponseDTO findById(Long id){
-        return modelMapper.map(getById(id), RoleResponseDTO.class);
+    public RoleDTO findById(Long id){
+        return modelMapper.map(getById(id), RoleDTO.class);
     }
 
     public List<PermissionDTO> findPermissionsById(Long id){
@@ -56,29 +51,29 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
                 .collect(Collectors.toList());
     }
 
-    public void addPermissionsToRole(Long id, List<Long> permissionIds){
-        Set<Permission> permissions =  getPermissionsByIds(permissionIds);
+    public void addPermissionToRole(Long id, Long permissionId){
+        Permission permission = getPermissionById(permissionId);
         Role role = getById(id);
-        permissions.forEach(permission -> role.getPermissions().add(permission));
+        role.getPermissions().add(permission);
         repository.save(role);
     }
 
-    public void deletePermissionToRole(Long id, List<Long> permissionIds){
-        Set<Permission> permissions = getPermissionsByIds(permissionIds);
+    public void deletePermissionToRole(Long id, Long permissionId){
+        Permission permission = getPermissionById(permissionId);
         Role role = getById(id);
-        permissions.forEach(permission -> role.getPermissions().remove(permission));
+        role.getPermissions().remove(permission);
         repository.save(role);
     }
 
 
 
-    public RoleResponseDTO update(Long id, RoleRequestDTO roleRequestDTO){
+    public RoleDTO update(Long id, RoleDTO roleRequestDTO){
         Role role = getById(id);
         role.setRole(roleRequestDTO.getRole());
         role.setDescription(roleRequestDTO.getDescription());
 
         repository.save(role);
-        return modelMapper.map(role, RoleResponseDTO.class);
+        return modelMapper.map(role, RoleDTO.class);
     }
 
     public void delete(Long id){
@@ -91,14 +86,9 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
         return optionalRole.get();
     }
 
-    private Set<Permission> getPermissionsByIds(List<Long> permissionIds){
-        return permissionIds
-                .stream()
-                .map(permissionId -> {
-                    Optional<Permission> optionalPermission =  permissionRepository.findById(permissionId);
-                    if (optionalPermission.isEmpty()) throw new PermissionNotFoundException(permissionId);
-                    return optionalPermission.get();
-                })
-                .collect(Collectors.toSet());
+    private Permission getPermissionById(Long permissionId){
+        Optional<Permission> optionalPermission =  permissionRepository.findById(permissionId);
+        if (optionalPermission.isEmpty()) throw new PermissionNotFoundException(permissionId);
+        return optionalPermission.get();
     }
 }

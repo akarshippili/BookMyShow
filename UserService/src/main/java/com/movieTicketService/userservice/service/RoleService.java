@@ -1,18 +1,17 @@
 package com.movieTicketService.userservice.service;
 
 import com.movieTicketService.userservice.dto.PermissionDTO;
-import com.movieTicketService.userservice.dto.RoleRequestDTO;
-import com.movieTicketService.userservice.dto.RoleResponseDTO;
+import com.movieTicketService.userservice.dto.RoleDTO;
 
 import java.util.List;
 
 public interface RoleService {
-    RoleResponseDTO save(RoleRequestDTO roleRequestDTO);
-    List<RoleResponseDTO> findAll();
-    RoleResponseDTO findById(Long id);
+    RoleDTO save(RoleDTO roleRequestDTO);
+    List<RoleDTO> findAll();
+    RoleDTO findById(Long id);
     List<PermissionDTO> findPermissionsById(Long id);
-    void addPermissionsToRole(Long id, List<Long> permissionIds);
-    void deletePermissionToRole(Long id, List<Long> permissionIds);
-    RoleResponseDTO update(Long id, RoleRequestDTO roleRequestDTO);
+    void addPermissionToRole(Long id, Long permissionId);
+    void deletePermissionToRole(Long id, Long permissionId);
+    RoleDTO update(Long id, RoleDTO roleRequestDTO);
     void delete(Long id);
 }
