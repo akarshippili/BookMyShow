@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -29,7 +28,7 @@ public class PermissionServiceImpl extends AbstractService implements Permission
         List<Permission> permissions = repository.findAll();
         return permissions.stream().map(
                 permission -> modelMapper.map(permission, PermissionDTO.class)
-        ).collect(Collectors.toList());
+        ).toList();
     }
 
     public PermissionDTO findById(Long id){
