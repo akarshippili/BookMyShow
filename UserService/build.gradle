@@ -67,3 +67,7 @@ application {
     // Define the main class for the application.
     mainClass = 'com.movieTicketService.userservice.UserServiceMain'
 }
+
+test {
+    useJUnitPlatform()
+}
