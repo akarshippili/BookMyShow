@@ -5,8 +5,11 @@ package com.movieTicketService.userservice;
 
 
 import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class UserServiceMainTest {
     @Test
-    public void mainTest() {}
+    public void contextLoads() {
+    }
 }
