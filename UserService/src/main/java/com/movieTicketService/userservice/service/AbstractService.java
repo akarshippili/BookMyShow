@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class AbstractService {
     protected ModelMapper modelMapper;
 
-    @Autowired
-    public void setModelMapper(ModelMapper modelMapper) {
+    public AbstractService(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
-
 }

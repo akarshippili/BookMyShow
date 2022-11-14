@@ -5,22 +5,28 @@ import com.movieTicketService.userservice.dao.repo.PermissionRepository;
 import com.movieTicketService.userservice.dto.PermissionDTO;
 import com.movieTicketService.userservice.exception.PermissionNotFoundException;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class PermissionServiceImpl extends AbstractService implements PermissionService  {
 
     private PermissionRepository repository;
+
+    @Autowired
+    public PermissionServiceImpl(ModelMapper modelMapper, PermissionRepository repository) {
+        super(modelMapper);
+        this.repository = repository;
+    }
 
 
     public PermissionDTO save(PermissionDTO permissionDTO){
         Permission permission = modelMapper.map(permissionDTO, Permission.class);
         Permission savedPermission = repository.save(permission);
-
         return modelMapper.map(savedPermission, PermissionDTO.class);
     }
 

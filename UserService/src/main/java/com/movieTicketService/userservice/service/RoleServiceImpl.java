@@ -8,20 +8,25 @@ import com.movieTicketService.userservice.dto.PermissionDTO;
 import com.movieTicketService.userservice.dto.RoleDTO;
 import com.movieTicketService.userservice.exception.PermissionNotFoundException;
 import com.movieTicketService.userservice.exception.RoleNotFoundException;
-import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class RoleServiceImpl extends AbstractService implements RoleService {
 
     private final RoleRepository repository;
     private final PermissionRepository permissionRepository;
+
+    public RoleServiceImpl(ModelMapper modelMapper, RoleRepository repository, PermissionRepository permissionRepository) {
+        super(modelMapper);
+        this.repository = repository;
+        this.permissionRepository = permissionRepository;
+    }
+
 
     public RoleDTO save(RoleDTO roleDTO){
         Role roleEntity = modelMapper.map(roleDTO, Role.class);

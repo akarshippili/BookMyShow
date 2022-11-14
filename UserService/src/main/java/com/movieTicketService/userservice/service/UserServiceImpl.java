@@ -7,7 +7,8 @@ import com.movieTicketService.userservice.dao.repo.UserRepository;
 import com.movieTicketService.userservice.dto.UserDTO;
 import com.movieTicketService.userservice.exception.RoleNotFoundException;
 import com.movieTicketService.userservice.exception.UserNotFoundException;
-import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +16,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class UserServiceImpl extends AbstractService implements UserService {
     private UserRepository repository;
     private RoleRepository roleRepository;
+
+    @Autowired
+    public UserServiceImpl(ModelMapper modelMapper, UserRepository repository, RoleRepository roleRepository) {
+        super(modelMapper);
+        this.repository = repository;
+        this.roleRepository = roleRepository;
+    }
 
     public UserDTO save(UserDTO userRequestDTO){
 
