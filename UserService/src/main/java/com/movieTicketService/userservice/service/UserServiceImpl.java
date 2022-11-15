@@ -66,7 +66,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
         user.setLastName(userRequestDTO.getLastName());
         user.setEmail(userRequestDTO.getEmail());
 
-        user = repository.save(user);
+        repository.save(user);
         return modelMapper.map(user, UserDTO.class);
     }
 
