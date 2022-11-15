@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImpl extends AbstractService implements RoleService {
@@ -40,7 +39,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
         List<Role> roles = repository.findAll();
         return roles.stream()
                 .map(role -> modelMapper.map(role, RoleDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public RoleDTO findById(Long id){
@@ -53,7 +52,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
         return role.getPermissions()
                 .stream()
                 .map(permission -> modelMapper.map(permission, PermissionDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public void addPermissionToRole(Long id, Long permissionId){
@@ -74,7 +73,7 @@ public class RoleServiceImpl extends AbstractService implements RoleService {
 
     public RoleDTO update(Long id, RoleDTO roleRequestDTO){
         Role role = getById(id);
-        role.setRole(roleRequestDTO.getRole());
+        role.setRole(roleRequestDTO.getRole().toUpperCase());
         role.setDescription(roleRequestDTO.getDescription());
 
         repository.save(role);
