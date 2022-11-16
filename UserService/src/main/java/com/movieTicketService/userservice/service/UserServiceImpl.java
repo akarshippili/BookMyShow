@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl extends AbstractService implements UserService {
-    private UserRepository repository;
-    private RoleRepository roleRepository;
+    private final UserRepository repository;
+    private final RoleRepository roleRepository;
 
     @Autowired
     public UserServiceImpl(ModelMapper modelMapper, UserRepository repository, RoleRepository roleRepository) {
