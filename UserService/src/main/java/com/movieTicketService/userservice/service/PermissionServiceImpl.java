@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class PermissionServiceImpl extends AbstractService implements PermissionService  {
 
-    private PermissionRepository repository;
+    private final PermissionRepository repository;
 
     @Autowired
     public PermissionServiceImpl(ModelMapper modelMapper, PermissionRepository repository) {
