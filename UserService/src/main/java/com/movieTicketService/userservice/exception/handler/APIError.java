@@ -14,6 +14,9 @@ public class APIError {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Map<String, String> errorMap;
 
+    public APIError() {
+    }
+
     public APIError(String message, String path) {
         this.message = message;
         this.path = path;
