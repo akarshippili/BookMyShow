@@ -85,6 +85,6 @@ public class UserController extends AbstractController {
     @DeleteMapping(path = "/users/{id}")
     public ResponseEntity<Objects> delete(@PathVariable Long id){
         service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
