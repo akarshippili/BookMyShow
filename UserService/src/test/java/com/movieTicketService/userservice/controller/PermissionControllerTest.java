@@ -36,7 +36,7 @@ class PermissionControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private PermissionService permissionService;
+    private PermissionService service;
 
     @InjectMocks
     private PermissionController permissionController;
@@ -44,7 +44,7 @@ class PermissionControllerTest {
     @Test
     void permissions_thenReturns200() throws Exception {
 
-        when(permissionService.findAll()).thenReturn(
+        when(service.findAll()).thenReturn(
                 List.of(
                         new PermissionDTO(),
                         new PermissionDTO()
@@ -60,7 +60,7 @@ class PermissionControllerTest {
 
     @Test
     void get_permission_valid_input_return200() throws Exception {
-        when(permissionService.findById(1L)).thenReturn(new PermissionDTO());
+        when(service.findById(1L)).thenReturn(new PermissionDTO());
 
         mockMvc.perform(
                 get("/api/v1/permissions/{id}", 1L)
@@ -70,7 +70,7 @@ class PermissionControllerTest {
 
     @Test
     void get_permission_invalid_input_return404() throws Exception {
-        when(permissionService.findById(1L)).thenThrow(new PermissionNotFoundException(1L));
+        when(service.findById(1L)).thenThrow(new PermissionNotFoundException(1L));
 
         MvcResult result =  mockMvc.perform(
                 get("/api/v1/permissions/{id}", 1L)
@@ -92,12 +92,12 @@ class PermissionControllerTest {
                 delete("/api/v1/permissions/{id}", 1L).accept(MediaType.APPLICATION_JSON_VALUE)
         ).andExpect(status().isNoContent());
 
-        verify(permissionService, times(1)).delete(1L);
+        verify(service, times(1)).delete(1L);
     }
 
     @Test
     void delete_permission_invalid_input_return404() throws Exception {
-        doThrow(new PermissionNotFoundException(1L)).when(permissionService).delete(1L);
+        doThrow(new PermissionNotFoundException(1L)).when(service).delete(1L);
 
         MvcResult result =  mockMvc.perform(delete("/api/v1/permissions/{id}", 1L))
                 .andExpect(status().isNotFound())
@@ -116,9 +116,9 @@ class PermissionControllerTest {
         permissionDTO.setCode("PER-001");
         permissionDTO.setDescription("permission description");
 
-        when(permissionService.save(any(PermissionDTO.class))).thenReturn(new PermissionDTO());
+        when(service.save(any(PermissionDTO.class))).thenReturn(new PermissionDTO());
 
-        MvcResult result = mockMvc.perform(
+        mockMvc.perform(
                 post("/api/v1/permissions")
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                        .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -127,7 +127,7 @@ class PermissionControllerTest {
                 .andExpect(status().isCreated())
                 .andReturn();
 
-        verify(permissionService, times(1)).save(any());
+        verify(service, times(1)).save(any());
     }
 
     @Test
@@ -153,7 +153,7 @@ class PermissionControllerTest {
 
     @Test
     void put_permissions_invalid_id() throws Exception {
-        when(permissionService.update(any(), any())).thenThrow(new PermissionNotFoundException(1L));
+        when(service.update(any(), any())).thenThrow(new PermissionNotFoundException(1L));
 
         PermissionDTO permissionDTO = new PermissionDTO();
         permissionDTO.setCode("PER-001");
@@ -167,7 +167,7 @@ class PermissionControllerTest {
                 .andExpect(status().isNotFound())
                 .andReturn();
 
-        verify(permissionService, times(1)).update(any(), any());
+        verify(service, times(1)).update(any(), any());
         APIError error = objectMapper.readValue(result.getResponse().getContentAsString(), APIError.class);
         assertEquals("Permission with id: 1 not found", error.getMessage());
         assertEquals("/api/v1/permissions/1", error.getPath());
@@ -201,7 +201,7 @@ class PermissionControllerTest {
         permissionDTO.setCode("PER-001");
         permissionDTO.setDescription("permission description");
 
-        when(permissionService.update(any(), any())).thenReturn(permissionDTO);
+        when(service.update(any(), any())).thenReturn(permissionDTO);
 
         MvcResult result =  mockMvc.perform(
                         put("/api/v1/permissions/{id}", 1L)
@@ -211,7 +211,7 @@ class PermissionControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        verify(permissionService, times(1)).update(eq(1L), any(PermissionDTO.class));
+        verify(service, times(1)).update(eq(1L), any(PermissionDTO.class));
     }
 
 
