@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 public class LocationController extends AbstractController {
 
-    private LocationService service;
+    private final LocationService service;
 
     public LocationController(@Autowired LocationService service) {
         this.service = service;

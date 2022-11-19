@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 public class StateController extends AbstractController {
 
-    private StateService service;
+    private final StateService service;
 
     public StateController(@Autowired StateService service) {
         this.service = service;

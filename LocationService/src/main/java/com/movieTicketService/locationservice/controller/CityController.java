@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public class CityController extends AbstractController {
 
-    private CityService service;
+    private final CityService service;
 
     public CityController(@Autowired CityService service) {
         this.service = service;
