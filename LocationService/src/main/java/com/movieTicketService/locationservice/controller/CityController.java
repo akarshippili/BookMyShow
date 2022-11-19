@@ -12,11 +12,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/v1")
-public class CityController {
+public class CityController extends AbstractController {
 
-    @Autowired
     private CityService service;
+
+    public CityController(@Autowired CityService service) {
+        this.service = service;
+    }
 
     @PostMapping(path = "/cities")
     public ResponseEntity<CityResponseDTO> addState(@Valid @RequestBody CityRequestDTO requestBody) {

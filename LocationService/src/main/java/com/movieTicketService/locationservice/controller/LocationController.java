@@ -13,12 +13,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/v1")
-public class LocationController {
+public class LocationController extends AbstractController {
 
-    @Autowired
     private LocationService service;
 
+    public LocationController(@Autowired LocationService service) {
+        this.service = service;
+    }
 
     @PostMapping(path = "/locations")
     public ResponseEntity<LocationResponseDTO> addLocation(@Valid @RequestBody LocationRequestDTO requestBody) {
