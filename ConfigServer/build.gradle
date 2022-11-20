@@ -14,7 +14,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 }
 
-group 'com.movieTicketService.configserver'
+group 'com.ticketapp.configserver'
 version '1.0-SNAPSHOT'
 
 ext {
@@ -41,7 +41,7 @@ dependencyManagement {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.movieTicketService.configserver.App'
+    mainClass = 'com.ticketapp.configserver.App'
 }
 
 tasks.named('test') {
