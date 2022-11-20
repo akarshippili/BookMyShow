@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AppTest {
+class AppTest {
     @Test
-    public void appTest() {
+    void appTest() {
         assertTrue(true);
     }
 }
