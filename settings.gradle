@@ -9,8 +9,8 @@
 
 rootProject.name = 'ticket-app'
 
-include 'UserService'
-include 'LocationService'
-include 'ConfigServer'
-include 'ApiGateway'
-include 'NamingServer'
+include 'user-service'
+include 'location-service'
+include 'config-server'
+include 'api-gateway'
+include 'naming-server'
