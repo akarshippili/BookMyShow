@@ -37,7 +37,7 @@ class RoleServiceImplTest {
     private ModelMapper modelMapper;
     private  RoleService roleService;
 
-    @Spy private Role role = new Role();
+    @Spy private final Role role = new Role();
 
    @BeforeEach
     public void setUp() {
