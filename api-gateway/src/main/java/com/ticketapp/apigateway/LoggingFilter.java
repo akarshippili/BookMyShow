@@ -19,7 +19,7 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.G
 
 @Component
 public class LoggingFilter implements GlobalFilter {
-    Log log = LogFactory.getLog(getClass());
+    final Log log = LogFactory.getLog(getClass());
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
