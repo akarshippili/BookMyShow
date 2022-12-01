@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @RestController
 public class UserController extends AbstractController {
     private final UserService service;
@@ -40,6 +42,7 @@ public class UserController extends AbstractController {
     )
     @PostMapping(path = "/users")
     public ResponseEntity<UserDTO> addUser(@Valid @RequestBody UserDTO userRequestDTO){
+        log.info("Adding user, FirstName {}, LastName {}, Email {}, Role {}", userRequestDTO.getFirstName(), userRequestDTO.getLastName(), userRequestDTO.getEmail(), userRequestDTO.getRoleId());
         return new ResponseEntity<>(service.save(userRequestDTO), HttpStatus.CREATED);
     }
 
@@ -51,6 +54,7 @@ public class UserController extends AbstractController {
     )
     @GetMapping(path = "/users")
     public ResponseEntity<List<UserDTO>> getAllUsers(){
+        log.info("Request for get all users");
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
@@ -62,6 +66,7 @@ public class UserController extends AbstractController {
     )
     @GetMapping(path = "/users/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id){
+        log.info("Request for get user by id {}", id);
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
@@ -73,6 +78,7 @@ public class UserController extends AbstractController {
     )
     @PutMapping(path = "/users/{id}")
     public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserDTO userRequestDTO){
+        log.info("updating user with FirstName {}, LastName {}, Email {}, Role {}", userRequestDTO.getFirstName(), userRequestDTO.getLastName(), userRequestDTO.getEmail(), userRequestDTO.getRoleId());
         return new ResponseEntity<>(service.update(id, userRequestDTO), HttpStatus.OK);
     }
 
@@ -84,6 +90,7 @@ public class UserController extends AbstractController {
     )
     @DeleteMapping(path = "/users/{id}")
     public ResponseEntity<Objects> delete(@PathVariable Long id){
+        log.info("Request for get user by id {}", id);
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
