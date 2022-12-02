@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @RestController
 public class PermissionController extends AbstractController {
 
@@ -40,6 +42,7 @@ public class PermissionController extends AbstractController {
     )
     @PostMapping(path = "/permissions")
     public ResponseEntity<PermissionDTO> addPermission(@Valid @RequestBody PermissionDTO permissionDTO){
+        log.info("Adding permission with code {} description {}", permissionDTO.getCode(), permissionDTO.getDescription());
         return new ResponseEntity<>( service.save(permissionDTO) , HttpStatus.CREATED);
     }
 
@@ -51,6 +54,7 @@ public class PermissionController extends AbstractController {
     )
     @GetMapping(path = "/permissions")
     public ResponseEntity<List<PermissionDTO>> getAllPermissions() {
+        log.info("Request for get all permissions");
         return new ResponseEntity<>( service.findAll() , HttpStatus.OK);
     }
 
@@ -62,6 +66,7 @@ public class PermissionController extends AbstractController {
     )
     @GetMapping(path = "/permissions/{id}")
     public ResponseEntity<PermissionDTO> getAllPermissions(@PathVariable Long id) {
+        log.info("Request for get permission by id {}", id);
         return new ResponseEntity<>( service.findById(id) , HttpStatus.OK);
     }
 
@@ -73,6 +78,7 @@ public class PermissionController extends AbstractController {
     )
     @PutMapping(path = "/permissions/{id}")
     public ResponseEntity<PermissionDTO> update(@PathVariable Long id, @Valid @RequestBody PermissionDTO permissionDTO){
+        log.info("Request for update permission {} with code {} description {}", id, permissionDTO.getCode(), permissionDTO.getDescription());
         PermissionDTO updatedPermission = service.update(id, permissionDTO);
         return new ResponseEntity<>(updatedPermission, HttpStatus.OK);
     }
@@ -85,6 +91,7 @@ public class PermissionController extends AbstractController {
     )
     @DeleteMapping(path = "/permissions/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id){
+        log.info("Request to delete permission by id {}", id);
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
