@@ -36,6 +36,7 @@ public class CityController extends AbstractController {
 
     @GetMapping(path = "/cities/{id}")
     public ResponseEntity<CityResponseDTO> getStateById(@PathVariable Long id){
+        log.info("Request for get city by id {}", id);
         return new ResponseEntity<>(service.getCityById(id), HttpStatus.OK);
     }
 
