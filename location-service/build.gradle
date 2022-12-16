@@ -16,6 +16,10 @@ ext {
     set('springCloudVersion', "2021.0.3")
 }
 
+jar {
+    enabled = false
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -31,12 +35,13 @@ dependencies {
 
     runtimeOnly 'org.postgresql:postgresql'
 
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.h2database:h2:2.1.214'
 }
 
 dependencyManagement {
