@@ -20,15 +20,6 @@ public class State {
     public State() {
     }
 
-
-    @Override
-    public String toString() {
-        return "State{" +
-                "stateId=" + stateId +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
     public Long getStateId() {
         return stateId;
     }

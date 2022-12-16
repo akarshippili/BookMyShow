@@ -17,18 +17,7 @@ public class City {
     @JoinColumn(name = "STATE_ID", referencedColumnName = "stateId")
     private State state;
 
-
-    @Override
-    public String toString() {
-        return "City{" +
-                "cityId=" + cityId +
-                ", name='" + name + '\'' +
-                ", state=" + state +
-                '}';
-    }
-
-    public City() {
-    }
+    public City() {}
 
     public Long getCityId() {
         return cityId;

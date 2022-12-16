@@ -47,13 +47,4 @@ public class Permission {
     public Set<Role> getRoles() {
         return roles;
     }
-
-    @Override
-    public String toString() {
-        return "Permission{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }

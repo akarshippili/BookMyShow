@@ -60,17 +60,6 @@ public class Location {
         this.landmark = landmark;
     }
 
-    @Override
-    public String toString() {
-        return "Location{" +
-                "locationId=" + locationId +
-                ", name='" + name + '\'' +
-                ", street='" + street + '\'' +
-                ", landmark='" + landmark + '\'' +
-                ", city=" + city +
-                '}';
-    }
-
     public City getCity() {
         return city;
     }
