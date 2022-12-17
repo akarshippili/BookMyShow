@@ -31,10 +31,7 @@ public class StateServiceImpl extends  AbstractService implements StateService  
 
 
     public StateResponseDTO update(Long id, StateRequestDTO requestDTO) {
-        Optional<State> stateOptional  = repository.findById(id);
-        if(stateOptional.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", id));
-
-        State state = stateOptional.get();
+        State state = stateById(id);
         state.setName(requestDTO.getName());
         state = repository.save(state);
 
@@ -42,17 +39,11 @@ public class StateServiceImpl extends  AbstractService implements StateService  
     }
 
     public void delete(Long id) {
-        Optional<State> stateOptional  = repository.findById(id);
-        if(stateOptional.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", id));
-
-        repository.delete(stateOptional.get());
+        repository.delete(stateById(id));
     }
 
     public StateResponseDTO getStateById(Long id){
-        Optional<State> stateOptional  = repository.findById(id);
-        if(stateOptional.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", id));
-
-        return modelMapper.map(stateOptional.get(), StateResponseDTO.class);
+        return modelMapper.map(stateById(id), StateResponseDTO.class);
     }
 
 
@@ -64,16 +55,17 @@ public class StateServiceImpl extends  AbstractService implements StateService  
 
 
     public List<CityResponseDTO> getCitiesByStateId(Long id) {
-        Optional<State> stateOptional =  repository.findById(id);
-        if(stateOptional.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", id));
-
-
-        return stateOptional
-                .get()
+        return stateById(id)
                 .getCities()
                 .stream()
                 .map(city -> modelMapper.map(city, CityResponseDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    private State stateById(Long id) {
+        Optional<State> stateOptional =  repository.findById(id);
+        if(stateOptional.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", id));
+        return stateOptional.get();
     }
 
 }
