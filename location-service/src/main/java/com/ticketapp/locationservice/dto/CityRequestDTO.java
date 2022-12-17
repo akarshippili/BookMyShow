@@ -1,9 +1,12 @@
 package com.ticketapp.locationservice.dto;
 
 
+import lombok.Data;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Data
 public class CityRequestDTO {
 
     @NotBlank
@@ -11,31 +14,4 @@ public class CityRequestDTO {
 
     @NotNull
     private Long stateId;
-
-    public CityRequestDTO() {
-    }
-
-    @Override
-    public String toString() {
-        return "CityRequestDTO{" +
-                "name='" + name + '\'' +
-                ", stateId=" + stateId +
-                '}';
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getStateId() {
-        return stateId;
-    }
-
-    public void setStateId(Long stateId) {
-        this.stateId = stateId;
-    }
 }
