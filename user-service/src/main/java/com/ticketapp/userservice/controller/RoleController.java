@@ -78,9 +78,9 @@ public class RoleController extends AbstractController {
             description = "add permission to a role by id"
     )
     @PostMapping(path = "/roles/{id}/permissions")
-    public ResponseEntity<Object> addPermissionToRole(@PathVariable Long id, @RequestBody Long permissionIds) {
-        log.info("Request to add permissions {} to a role by id: {}", permissionIds, id);
-        service.addPermissionToRole(id, permissionIds);
+    public ResponseEntity<Object> addPermissionToRole(@PathVariable Long id, @RequestBody Long permissionId) {
+        log.info("Request to add permissions {} to a role by id: {}", permissionId, id);
+        service.addPermissionToRole(id, permissionId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
