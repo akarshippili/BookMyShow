@@ -31,12 +31,11 @@ public class CityServiceImpl extends AbstractService implements CityService {
 
     @Override
     public CityResponseDTO addCity(CityRequestDTO requestDTO) {
-        Optional<State> optionalState = stateRepository.findById(requestDTO.getStateId());
-        if(optionalState.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", requestDTO.getStateId()));
+        State state = stateById(requestDTO.getStateId());
 
         City city = new City();
         city.setName(requestDTO.getName());
-        city.setState(optionalState.get());
+        city.setState(state);
         city = repository.save(city);
 
         return modelMapper.map(city, CityResponseDTO.class);
@@ -44,10 +43,7 @@ public class CityServiceImpl extends AbstractService implements CityService {
 
     @Override
     public CityResponseDTO getCityById(Long id) {
-        Optional<City> optionalCity = repository.findById(id);
-        if(optionalCity.isEmpty()) throw new CityNotFoundException(String.format("City with id %d not found", id));
-
-        return modelMapper.map(optionalCity.get(), CityResponseDTO.class);
+        return modelMapper.map(cityById(id), CityResponseDTO.class);
     }
 
     @Override
@@ -62,15 +58,11 @@ public class CityServiceImpl extends AbstractService implements CityService {
 
     @Override
     public CityResponseDTO update(Long id, CityRequestDTO requestDTO) {
-        Optional<City> optionalCity = repository.findById(id);
-        if(optionalCity.isEmpty()) throw new CityNotFoundException(String.format("City with id %d not found", id));
+        City city = cityById(id);
+        State state = stateById(requestDTO.getStateId());
 
-        Optional<State> optionalState = stateRepository.findById(requestDTO.getStateId());
-        if(optionalState.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", requestDTO.getStateId()));
-
-        City city = optionalCity.get();
         city.setName(requestDTO.getName());
-        city.setState(optionalState.get());
+        city.setState(state);
         city = repository.save(city);
 
         return modelMapper.map(city, CityResponseDTO.class);
@@ -78,9 +70,18 @@ public class CityServiceImpl extends AbstractService implements CityService {
 
     @Override
     public void delete(Long id) {
+        repository.delete(cityById(id));
+    }
+   
+    private City cityById(Long id) {
         Optional<City> optionalCity = repository.findById(id);
-        if(optionalCity.isEmpty()) throw new CityNotFoundException(String.format("City with id %d not found", id));
+        if(optionalCity.isEmpty()) throw new CityNotFoundException(String.format("City with id %d not found",id));
+        return optionalCity.get();
+    }
 
-        repository.delete(optionalCity.get());
+    private State stateById(Long id) {
+        Optional<State> optionalState = stateRepository.findById(id);
+        if(optionalState.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", id));
+        return optionalState.get();
     }
 }
