@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class StateServiceImpl extends  AbstractService implements StateService  {
-    private StateRepository repository;
+    private final StateRepository repository;
 
     public StateServiceImpl(ModelMapper modelMapper, StateRepository repository) {
         super(modelMapper);
