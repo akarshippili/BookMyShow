@@ -31,15 +31,13 @@ public class LocationServiceImpl extends AbstractService implements LocationServ
 
     @Override
     public LocationResponseDTO addLocation(LocationRequestDTO requestDTO) {
-        Optional<City> optionalCity = cityRepository.findById(requestDTO.getCityId());
-        if(optionalCity.isEmpty()) throw new CityNotFoundException(String.format("City with id %d not found", requestDTO.getCityId()));
+        City city = cityById(requestDTO.getCityId());
 
         Location location = new Location();
-        location.setCity(optionalCity.get());
+        location.setCity(city);
         location.setLandmark(requestDTO.getLandmark());
         location.setName(requestDTO.getName());
         location.setStreet(requestDTO.getStreet());
-
         location = repository.save(location);
 
         return modelMapper.map(location, LocationResponseDTO.class);
@@ -47,15 +45,11 @@ public class LocationServiceImpl extends AbstractService implements LocationServ
 
     @Override
     public LocationResponseDTO getLocationById(Long id) {
-        Optional<Location> optionalLocation = repository.findById(id);
-        if(optionalLocation.isEmpty()) throw new LocationNotFoundException(String.format("Location with id %d not found", id));
-
-        return modelMapper.map(optionalLocation.get(), LocationResponseDTO.class);
+        return modelMapper.map(locationById(id), LocationResponseDTO.class);
     }
 
     @Override
     public List<LocationResponseDTO> getAllLocations() {
-
         List<Location> locations = repository.findAll();
 
         return locations
@@ -67,18 +61,13 @@ public class LocationServiceImpl extends AbstractService implements LocationServ
     @Override
     public LocationResponseDTO update(Long id, LocationRequestDTO requestDTO) {
 
-        Optional<Location> optionalLocation = repository.findById(id);
-        if(optionalLocation.isEmpty()) throw new LocationNotFoundException(String.format("Location with id %d not found", id));
+        Location location = locationById(id);
+        City city = cityById(requestDTO.getCityId());
 
-        Optional<City> optionalCity = cityRepository.findById(requestDTO.getCityId());
-        if(optionalCity.isEmpty()) throw new CityNotFoundException(String.format("City with id %d not found", requestDTO.getCityId()));
-
-        Location location = optionalLocation.get();
-        location.setCity(optionalCity.get());
+        location.setCity(city);
         location.setLandmark(requestDTO.getLandmark());
         location.setName(requestDTO.getName());
         location.setStreet(requestDTO.getStreet());
-
         location = repository.save(location);
 
         return modelMapper.map(location, LocationResponseDTO.class);
@@ -86,10 +75,19 @@ public class LocationServiceImpl extends AbstractService implements LocationServ
 
     @Override
     public void delete(Long id) {
+        repository.delete(locationById(id));
+    }
+
+    private Location locationById(Long id){
         Optional<Location> optionalLocation = repository.findById(id);
         if(optionalLocation.isEmpty()) throw new LocationNotFoundException(String.format("Location with id %d not found", id));
 
-        Location location = optionalLocation.get();
-        repository.delete(location);
+        return optionalLocation.get();
+    }
+
+    private City cityById(Long id) {
+        Optional<City> optionalCity = cityRepository.findById(id);
+        if(optionalCity.isEmpty()) throw new CityNotFoundException(String.format("City with id %d not found",id));
+        return optionalCity.get();
     }
 }
