@@ -17,16 +17,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class LocationServiceImpl implements  LocationService{
+public class LocationServiceImpl extends AbstractService implements LocationService{
 
-    @Autowired
     private CityRepository cityRepository;
 
-    @Autowired
     private LocationRepository repository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    public LocationServiceImpl(ModelMapper modelMapper, CityRepository cityRepository, LocationRepository repository) {
+        super(modelMapper);
+        this.cityRepository = cityRepository;
+        this.repository = repository;
+    }
 
     @Override
     public LocationResponseDTO addLocation(LocationRequestDTO requestDTO) {

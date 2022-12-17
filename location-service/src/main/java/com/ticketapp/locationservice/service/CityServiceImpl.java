@@ -17,16 +17,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CityServiceImpl implements CityService {
+public class CityServiceImpl extends AbstractService implements CityService {
 
-    @Autowired
     private StateRepository stateRepository;
 
-    @Autowired
     private CityRepository repository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    public CityServiceImpl(ModelMapper modelMapper, StateRepository stateRepository, CityRepository repository) {
+        super(modelMapper);
+        this.stateRepository = stateRepository;
+        this.repository = repository;
+    }
 
     @Override
     public CityResponseDTO addCity(CityRequestDTO requestDTO) {

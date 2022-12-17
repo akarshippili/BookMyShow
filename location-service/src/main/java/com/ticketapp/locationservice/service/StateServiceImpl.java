@@ -7,7 +7,6 @@ import com.ticketapp.locationservice.dto.StateRequestDTO;
 import com.ticketapp.locationservice.dto.StateResponseDTO;
 import com.ticketapp.locationservice.exception.StateNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +14,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class StateServiceImpl implements StateService {
-
-    @Autowired
+public class StateServiceImpl extends  AbstractService implements StateService  {
     private StateRepository repository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    public StateServiceImpl(ModelMapper modelMapper, StateRepository repository) {
+        super(modelMapper);
+        this.repository = repository;
+    }
 
     public List<StateResponseDTO> getAllStates(){
         List<State> states  = repository.findAll();
