@@ -55,6 +55,7 @@ class LocationServiceImplTest {
         // given
         City city = new City();
         when(cityRepository.findById(anyLong())).thenReturn(Optional.of(city));
+        when(locationRepository.save(any())).thenReturn(new Location());
 
         LocationRequestDTO request = new LocationRequestDTO();
         request.setName("Roxy Cinema New York");
