@@ -176,7 +176,6 @@ class CityServiceImplTest {
         State state = new State();
         when(stateRepository.findById(anyLong())).thenReturn(Optional.of(state));
         when(cityRepository.findById(anyLong())).thenReturn(Optional.of(new City()));
-        when(cityRepository.save(any(City.class))).thenReturn(new City());
 
 
         CityRequestDTO request = new CityRequestDTO();
@@ -184,7 +183,7 @@ class CityServiceImplTest {
         request.setStateId(1L);
 
         // when
-        cityService.update(1L, request);
+        CityResponseDTO response = cityService.update(1L, request);
 
         // then
         Mockito.verify(stateRepository, times(1)).findById(request.getStateId());

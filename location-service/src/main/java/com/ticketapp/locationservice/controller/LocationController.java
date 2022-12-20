@@ -22,19 +22,19 @@ public class LocationController extends AbstractController {
     }
 
     @PostMapping(path = "/locations")
-    public ResponseEntity<LocationResponseDTO> addLocation(@Valid @RequestBody LocationRequestDTO requestBody) {
-        LocationResponseDTO response = service.addLocation(requestBody);
+    public ResponseEntity<LocationResponseDTO> save(@Valid @RequestBody LocationRequestDTO requestBody) {
+        LocationResponseDTO response = service.save(requestBody);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/locations")
     public ResponseEntity<List<LocationResponseDTO>> getAllLocations(){
-        return new ResponseEntity<>(service.getAllLocations(), HttpStatus.OK);
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/locations/{id}")
     public ResponseEntity<LocationResponseDTO> getLocationById(@PathVariable Long id){
-        return new ResponseEntity<>(service.getLocationById(id), HttpStatus.OK);
+        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
 

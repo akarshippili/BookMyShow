@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface LocationService {
 
-    LocationResponseDTO addLocation(LocationRequestDTO requestDTO);
+    LocationResponseDTO save(LocationRequestDTO requestDTO);
 
-    LocationResponseDTO getLocationById(Long id);
+    LocationResponseDTO findById(Long id);
 
-    List<LocationResponseDTO> getAllLocations();
+    List<LocationResponseDTO> findAll();
 
     LocationResponseDTO update(Long id, LocationRequestDTO requestDTO);
 

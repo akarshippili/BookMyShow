@@ -9,7 +9,6 @@ import com.ticketapp.locationservice.dto.LocationResponseDTO;
 import com.ticketapp.locationservice.exception.CityNotFoundException;
 import com.ticketapp.locationservice.exception.LocationNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,9 +18,9 @@ import java.util.stream.Collectors;
 @Service
 public class LocationServiceImpl extends AbstractService implements LocationService{
 
-    private CityRepository cityRepository;
+    private final CityRepository cityRepository;
 
-    private LocationRepository repository;
+    private final LocationRepository repository;
 
     public LocationServiceImpl(ModelMapper modelMapper, CityRepository cityRepository, LocationRepository repository) {
         super(modelMapper);
@@ -30,7 +29,7 @@ public class LocationServiceImpl extends AbstractService implements LocationServ
     }
 
     @Override
-    public LocationResponseDTO addLocation(LocationRequestDTO requestDTO) {
+    public LocationResponseDTO save(LocationRequestDTO requestDTO) {
         City city = cityById(requestDTO.getCityId());
 
         Location location = new Location();
@@ -44,12 +43,12 @@ public class LocationServiceImpl extends AbstractService implements LocationServ
     }
 
     @Override
-    public LocationResponseDTO getLocationById(Long id) {
+    public LocationResponseDTO findById(Long id) {
         return modelMapper.map(locationById(id), LocationResponseDTO.class);
     }
 
     @Override
-    public List<LocationResponseDTO> getAllLocations() {
+    public List<LocationResponseDTO> findAll() {
         List<Location> locations = repository.findAll();
 
         return locations
