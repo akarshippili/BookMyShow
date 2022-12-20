@@ -30,7 +30,7 @@ public class CityServiceImpl extends AbstractService implements CityService {
     }
 
     @Override
-    public CityResponseDTO addCity(CityRequestDTO requestDTO) {
+    public CityResponseDTO save(CityRequestDTO requestDTO) {
         State state = stateById(requestDTO.getStateId());
 
         City city = new City();
@@ -42,12 +42,12 @@ public class CityServiceImpl extends AbstractService implements CityService {
     }
 
     @Override
-    public CityResponseDTO getCityById(Long id) {
+    public CityResponseDTO findById(Long id) {
         return modelMapper.map(cityById(id), CityResponseDTO.class);
     }
 
     @Override
-    public List<CityResponseDTO> getAllCities() {
+    public List<CityResponseDTO> findAll() {
         List<City> cities = repository.findAll();
 
         return cities.

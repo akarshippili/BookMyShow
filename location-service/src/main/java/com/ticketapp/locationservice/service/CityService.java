@@ -6,11 +6,11 @@ import com.ticketapp.locationservice.dto.CityResponseDTO;
 import java.util.List;
 
 public interface CityService {
-    CityResponseDTO addCity(CityRequestDTO requestDTO);
+    CityResponseDTO save(CityRequestDTO requestDTO);
 
-    CityResponseDTO getCityById(Long id);
+    CityResponseDTO findById(Long id);
 
-    List<CityResponseDTO> getAllCities();
+    List<CityResponseDTO> findAll();
 
     CityResponseDTO update(Long id, CityRequestDTO requestDTO);
 
