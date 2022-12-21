@@ -51,7 +51,8 @@ class PermissionControllerTest {
                 )
         );
 
-        MvcResult result = mockMvc.perform(get("/api/v1/permissions").accept(MediaType.APPLICATION_JSON))
+        MvcResult result = mockMvc
+                .perform(get("/api/v1/permissions").accept(MediaType.APPLICATION_JSON))
                 .andReturn();
 
         assertEquals(200, result.getResponse().getStatus());
@@ -72,10 +73,8 @@ class PermissionControllerTest {
     void get_permission_invalid_input_return404() throws Exception {
         when(service.findById(1L)).thenThrow(new PermissionNotFoundException(1L));
 
-        MvcResult result =  mockMvc.perform(
-                get("/api/v1/permissions/{id}", 1L)
-               .accept(MediaType.APPLICATION_JSON_VALUE)
-                )
+        MvcResult result =  mockMvc
+                .perform(get("/api/v1/permissions/{id}", 1L).accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andReturn();
@@ -88,9 +87,9 @@ class PermissionControllerTest {
     @Test
     void delete_permission_valid_input_return200() throws Exception {
 
-        mockMvc.perform(
-                delete("/api/v1/permissions/{id}", 1L).accept(MediaType.APPLICATION_JSON_VALUE)
-        ).andExpect(status().isNoContent());
+        mockMvc
+                .perform(delete("/api/v1/permissions/{id}", 1L).accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isNoContent());
 
         verify(service, times(1)).delete(1L);
     }
@@ -99,7 +98,8 @@ class PermissionControllerTest {
     void delete_permission_invalid_input_return404() throws Exception {
         doThrow(new PermissionNotFoundException(1L)).when(service).delete(1L);
 
-        MvcResult result =  mockMvc.perform(delete("/api/v1/permissions/{id}", 1L))
+        MvcResult result =  mockMvc
+                .perform(delete("/api/v1/permissions/{id}", 1L))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andReturn();
@@ -121,8 +121,8 @@ class PermissionControllerTest {
         mockMvc.perform(
                 post("/api/v1/permissions")
                         .accept(MediaType.APPLICATION_JSON_VALUE)
-                       .contentType(MediaType.APPLICATION_JSON_VALUE)
-                       .content(objectMapper.writeValueAsString(permissionDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(permissionDTO))
                 )
                 .andExpect(status().isCreated())
                 .andReturn();
