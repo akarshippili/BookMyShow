@@ -23,18 +23,18 @@ public class StateController extends AbstractController {
 
     @PostMapping(path = "/states")
     public ResponseEntity<StateResponseDTO> addState(@Valid @RequestBody StateRequestDTO requestBody) {
-        StateResponseDTO response = service.addState(requestBody);
+        StateResponseDTO response = service.save(requestBody);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/states")
     public ResponseEntity<List<StateResponseDTO>> getAllStates(){
-        return new ResponseEntity<>(service.getAllStates(), HttpStatus.OK);
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/states/{id}")
     public ResponseEntity<StateResponseDTO> getStateById(@PathVariable Long id){
-        return new ResponseEntity<>(service.getStateById(id), HttpStatus.OK);
+        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @GetMapping(path = "/states/{id}/cities")

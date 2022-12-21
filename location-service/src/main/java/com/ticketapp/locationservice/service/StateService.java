@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface StateService {
 
-    StateResponseDTO addState(StateRequestDTO requestDTO);
+    StateResponseDTO save(StateRequestDTO requestDTO);
 
-    StateResponseDTO getStateById(Long id);
+    StateResponseDTO findById(Long id);
 
-    List<StateResponseDTO> getAllStates();
+    List<StateResponseDTO> findAll();
 
     StateResponseDTO update(Long id, StateRequestDTO requestDTO);
 

@@ -22,7 +22,7 @@ public class StateServiceImpl extends  AbstractService implements StateService  
         this.repository = repository;
     }
 
-    public List<StateResponseDTO> getAllStates(){
+    public List<StateResponseDTO> findAll(){
         List<State> states  = repository.findAll();
         return states.stream()
                 .map(state -> modelMapper.map(state, StateResponseDTO.class))
@@ -42,12 +42,12 @@ public class StateServiceImpl extends  AbstractService implements StateService  
         repository.delete(stateById(id));
     }
 
-    public StateResponseDTO getStateById(Long id){
+    public StateResponseDTO findById(Long id){
         return modelMapper.map(stateById(id), StateResponseDTO.class);
     }
 
 
-    public StateResponseDTO addState(StateRequestDTO request){
+    public StateResponseDTO save(StateRequestDTO request){
         State state = modelMapper.map(request, State.class);
         state = repository.save(state);
         return modelMapper.map(state, StateResponseDTO.class);
