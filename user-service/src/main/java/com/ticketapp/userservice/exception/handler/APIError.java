@@ -1,10 +1,12 @@
 package com.ticketapp.userservice.exception.handler;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.Map;
 
+@Data
 public class APIError {
 
     private String message;
@@ -27,48 +29,6 @@ public class APIError {
         this.message = message;
         this.path = path;
         this.timeStamp = new Date();
-        this.errorMap = errorMap;
-    }
-
-    @Override
-    public String toString() {
-        return "APIError{" +
-                "message='" + message + '\'' +
-                ", path='" + path + '\'' +
-                ", timeStamp=" + timeStamp +
-                ", errorMap=" + errorMap +
-                '}';
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public Date getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public Map<String, String> getErrorMap() {
-        return errorMap;
-    }
-
-    public void setErrorMap(Map<String, String> errorMap) {
         this.errorMap = errorMap;
     }
 }

@@ -26,7 +26,7 @@ public class StateServiceImpl extends  AbstractService implements StateService  
         List<State> states  = repository.findAll();
         return states.stream()
                 .map(state -> modelMapper.map(state, StateResponseDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
 
@@ -59,12 +59,12 @@ public class StateServiceImpl extends  AbstractService implements StateService  
                 .getCities()
                 .stream()
                 .map(city -> modelMapper.map(city, CityResponseDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private State stateById(Long id) {
         Optional<State> stateOptional =  repository.findById(id);
-        if(stateOptional.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", id));
+        if(stateOptional.isEmpty()) throw new StateNotFoundException(id);
         return stateOptional.get();
     }
 

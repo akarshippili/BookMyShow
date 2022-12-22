@@ -81,7 +81,7 @@ public class CityServiceImpl extends AbstractService implements CityService {
 
     private State stateById(Long id) {
         Optional<State> optionalState = stateRepository.findById(id);
-        if(optionalState.isEmpty()) throw new StateNotFoundException(String.format("State with id %d not found", id));
+        if(optionalState.isEmpty()) throw new StateNotFoundException(id);
         return optionalState.get();
     }
 }
