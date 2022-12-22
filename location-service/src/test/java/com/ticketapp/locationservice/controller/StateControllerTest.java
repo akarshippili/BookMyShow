@@ -120,7 +120,7 @@ class StateControllerTest {
         when(service.getCitiesByStateId(anyLong())).thenReturn(cityResponseDTOS);
 
         // when - then
-        MvcResult result = mockMvc.perform(get("/api/v1/states/{id}/cities").accept(MediaType.APPLICATION_JSON_VALUE))
+        MvcResult result = mockMvc.perform(get("/api/v1/states/{id}/cities", 1L).accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andReturn();
