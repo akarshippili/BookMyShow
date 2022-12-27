@@ -23,7 +23,7 @@ import java.util.Objects;
 public class UserController extends AbstractController {
     private final UserService service;
 
-    public UserController(@Autowired UserService service) {
+    public UserController(UserService service) {
         this.service = service;
     }
 
