@@ -5,7 +5,7 @@ EXPOSE 8080
 RUN mkdir /app
 WORKDIR /app
 
-ARG ARTIFACT=/build/libs/*.jar
+ARG ARTIFACT=*.jar
 RUN echo $ARTIFACT
 
 COPY /build/libs/$ARTIFACT user-service.jar
