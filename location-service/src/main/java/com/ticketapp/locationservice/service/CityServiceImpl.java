@@ -75,7 +75,7 @@ public class CityServiceImpl extends AbstractService implements CityService {
    
     private City cityById(Long id) {
         Optional<City> optionalCity = repository.findById(id);
-        if(optionalCity.isEmpty()) throw new CityNotFoundException(String.format("City with id %d not found",id));
+        if(optionalCity.isEmpty()) throw new CityNotFoundException(id);
         return optionalCity.get();
     }
 

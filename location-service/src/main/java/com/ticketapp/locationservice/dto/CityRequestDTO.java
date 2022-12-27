@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CityRequestDTO {
 
-    @NotBlank
+    @NotBlank(message = "name cannot be empty")
     private String name;
 
     @NotNull

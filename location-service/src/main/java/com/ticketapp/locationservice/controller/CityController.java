@@ -23,19 +23,19 @@ public class CityController extends AbstractController {
     }
 
     @PostMapping(path = "/cities")
-    public ResponseEntity<CityResponseDTO> addState(@Valid @RequestBody CityRequestDTO requestBody) {
+    public ResponseEntity<CityResponseDTO> save(@Valid @RequestBody CityRequestDTO requestBody) {
         CityResponseDTO response = service.save(requestBody);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/cities")
-    public ResponseEntity<List<CityResponseDTO>> getAllStates(){
+    public ResponseEntity<List<CityResponseDTO>> findAll(){
         log.info("Request for get all cities");
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/cities/{id}")
-    public ResponseEntity<CityResponseDTO> getStateById(@PathVariable Long id){
+    public ResponseEntity<CityResponseDTO> findById(@PathVariable Long id){
         log.info("Request for get city by id {}", id);
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
@@ -49,7 +49,7 @@ public class CityController extends AbstractController {
     @DeleteMapping(path = "/cities/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id){
         service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

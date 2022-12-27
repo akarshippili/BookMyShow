@@ -1,7 +1,7 @@
 package com.ticketapp.locationservice.exception;
 
 public class CityNotFoundException extends RuntimeException{
-    public CityNotFoundException(String message) {
-        super(message);
+    public CityNotFoundException(Long id){
+        super(String.format("City with id %d not found", id));
     }
 }
