@@ -23,7 +23,7 @@ public class PermissionController extends AbstractController {
 
     private final PermissionService service;
 
-    public PermissionController(@Autowired PermissionService service) {
+    public PermissionController(PermissionService service) {
         this.service = service;
     }
 

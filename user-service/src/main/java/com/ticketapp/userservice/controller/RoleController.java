@@ -24,7 +24,7 @@ public class RoleController extends AbstractController {
 
     private final RoleService service;
 
-    public RoleController(@Autowired RoleService service) {
+    public RoleController(RoleService service) {
         this.service = service;
     }
 
