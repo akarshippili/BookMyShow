@@ -79,7 +79,7 @@ public class LocationServiceImpl extends AbstractService implements LocationServ
 
     private Location locationById(Long id){
         Optional<Location> optionalLocation = repository.findById(id);
-        if(optionalLocation.isEmpty()) throw new LocationNotFoundException(String.format("Location with id %d not found", id));
+        if(optionalLocation.isEmpty()) throw new LocationNotFoundException(id);
 
         return optionalLocation.get();
     }

@@ -8,15 +8,15 @@ import javax.validation.constraints.NotNull;
 @Data
 public class LocationRequestDTO {
 
-    @NotBlank
+    @NotBlank(message = "name cannot be empty")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "street cannot be empty")
     private String street;
 
-    @NotBlank
+    @NotBlank(message = "landmark cannot be empty")
     private String landmark;
 
-    @NotNull
+    @NotNull(message = "city cannot be empty")
     private Long cityId;
 }

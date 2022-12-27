@@ -28,12 +28,12 @@ public class LocationController extends AbstractController {
     }
 
     @GetMapping(path = "/locations")
-    public ResponseEntity<List<LocationResponseDTO>> getAllLocations(){
+    public ResponseEntity<List<LocationResponseDTO>> findAll(){
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/locations/{id}")
-    public ResponseEntity<LocationResponseDTO> getLocationById(@PathVariable Long id){
+    public ResponseEntity<LocationResponseDTO> findById(@PathVariable Long id){
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
@@ -46,7 +46,7 @@ public class LocationController extends AbstractController {
     @DeleteMapping(path = "/locations/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id){
         service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
