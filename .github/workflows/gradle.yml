@@ -45,7 +45,7 @@ jobs:
       run: |
           pwd
           ls -a .
-          cd .build/libs
+          cd ./user-service/build/libs
           pwd
           ls -a .
       shell: bash
