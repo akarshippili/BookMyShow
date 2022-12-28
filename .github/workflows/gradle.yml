@@ -65,6 +65,6 @@ jobs:
     - name: Build and push Docker images
       uses: docker/build-push-action@v3.2.0
       with:
-        context: "{{defaultContext}}:user-service"
+        context: /home/runner/work/TicketApp/TicketApp/user-service        
         push: true
         tags: akarshippili/user-service:latest
