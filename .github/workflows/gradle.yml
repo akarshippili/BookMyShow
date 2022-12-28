@@ -11,6 +11,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'test/workflow'
   pull_request:
     types:
       - closed
