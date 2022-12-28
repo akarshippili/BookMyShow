@@ -41,6 +41,15 @@ jobs:
       with:
         arguments: build
     
+    - name: list files
+      run: |
+          pwd
+          ls -a .
+          cd ./user-service/build/libs
+          pwd
+          ls -a .
+      shell: bash
+    
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
     
@@ -56,6 +65,6 @@ jobs:
     - name: Build and push Docker images
       uses: docker/build-push-action@v3.2.0
       with:
-        context: "{{defaultContext}}:user-service"
+        context: /home/runner/work/TicketApp/TicketApp/user-service        
         push: true
         tags: akarshippili/user-service:latest
