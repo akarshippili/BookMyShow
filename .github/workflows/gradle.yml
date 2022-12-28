@@ -8,6 +8,10 @@
 name: Java CI with Gradle
 
 on:
+  push:
+    branches:
+      - 'main'
+      - 'test/workflow'
   pull_request:
     types:
       - closed
@@ -52,6 +56,6 @@ jobs:
     - name: Build and push Docker images
       uses: docker/build-push-action@v3.2.0
       with:
-        file: user-service/Dockerfile
+        context: "{{defaultContext}}:user-service"
         push: true
         tags: akarshippili/user-service:latest
