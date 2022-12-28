@@ -41,6 +41,15 @@ jobs:
       with:
         arguments: build
     
+    - name: list files
+      run: |
+          pwd
+          ls -a .
+          cd .build/libs
+          pwd
+          ls -a .
+      shell: bash
+    
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
     
