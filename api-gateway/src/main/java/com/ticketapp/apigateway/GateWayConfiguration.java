@@ -14,18 +14,12 @@ public class GateWayConfiguration {
                 .routes()
                 .route(predicateSpec -> predicateSpec
                                 .path("/user-service/**")
-                                .filters(
-                                        gatewayFilterSpec -> gatewayFilterSpec
-                                                .rewritePath("/user-service/(?<segment>.*)", "/${segment}")
-                                )
+                                .filters(f -> f.stripPrefix(1))
                                 .uri("lb://USER-SERVICE")
                 )
                 .route(predicateSpec -> predicateSpec
                         .path("/location-service/**")
-                        .filters(
-                                gatewayFilterSpec -> gatewayFilterSpec
-                                        .rewritePath("/location-service/(?<segment>.*)", "/${segment}")
-                        )
+                        .filters(f -> f.stripPrefix(1))
                         .uri("lb://LOCATION-SERVICE")
                 )
                 .build();
