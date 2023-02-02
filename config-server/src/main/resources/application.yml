@@ -6,4 +6,6 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/akarshippili/BookMyShow-Configuration
+          uri: https://github.com/akarshippili/TicketApp-Configuration
+          default-label: main
+          clone-on-start: true
