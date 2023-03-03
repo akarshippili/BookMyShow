@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   
-  user-service build-and-publish:
+  user-service_build-and-publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -71,7 +71,7 @@ jobs:
         push: true
         tags: akarshippili/user-service:latest
   
-  location-service build-and-publish:
+  location-service_build-and-publish:
     runs-on: ubuntu-latest
 
     steps:
