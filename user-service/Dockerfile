@@ -8,6 +8,6 @@ WORKDIR /app
 ARG ARTIFACT=*.jar
 RUN echo $ARTIFACT
 
-COPY build/libs/$ARTIFACT user-service.jar
+COPY ./build/libs/$ARTIFACT user-service.jar
 
 ENTRYPOINT java -jar user-service.jar
