@@ -37,26 +37,17 @@ jobs:
       with:
         java-version: '16'
         distribution: 'temurin'
-
-    - name: cd into user-service
-      run: |
-          pwd
-          ls -a .
-          cd ./user-service
-          pwd
-          ls -a .
-      shell: bash
         
     - name: Build with Gradle [user-service]
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
-        arguments: build
+        arguments: :user-service:build
     
-    - name: cd into build/libs directory
+    - name: cd into ./user-service/build/libs directory
       run: |
           pwd
           ls -a .
-          cd ./build/libs
+          cd ./user-service/build/libs
           pwd
           ls -a .
       shell: bash
