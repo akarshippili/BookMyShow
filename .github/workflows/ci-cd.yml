@@ -11,7 +11,8 @@ on:
   push:
     branches:
       - 'main'
-      - 'test/workflow'
+      - 'feature/location-service-docker-image-actions'
+
   pull_request:
     types:
       - closed
@@ -24,28 +25,38 @@ permissions:
 jobs:
   
   build-and-publish:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+
+    - name: git checkout
+      uses: actions/checkout@v3
     
     - name: Set up JDK 16
       uses: actions/setup-java@v3
       with:
         java-version: '16'
         distribution: 'temurin'
+
+    - name: cd into user-service
+      run: |
+          pwd
+          ls -a .
+          cd ./user-service
+          pwd
+          ls -a .
+      shell: bash
         
-    - name: Build with Gradle
+    - name: Build with Gradle [user-service]
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: build
     
-    - name: list files
+    - name: cd into build/libs directory
       run: |
           pwd
           ls -a .
-          cd ./user-service/build/libs
+          cd ./build/libs
           pwd
           ls -a .
       shell: bash
@@ -62,7 +73,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     
-    - name: Build and push Docker images
+    - name: Build and push Docker images [user-service]
       uses: docker/build-push-action@v3.2.0
       with:
         context: /home/runner/work/TicketApp/TicketApp/user-service        
