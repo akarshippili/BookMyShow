@@ -8,5 +8,5 @@ WORKDIR scr
 ARG ARTIFACT=*.jar
 RUN echo pwd
 
-COPY /build/libs/$ARTIFACT app.jar
+COPY ./build/libs/$ARTIFACT app.jar
 ENTRYPOINT java -jar app.jar
